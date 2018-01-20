@@ -1,6 +1,6 @@
 {
-  "name": "CureRef",
-  "app_id": "",
+  "name": "Cure-Temp",
+  "app_id": "com.zaki.cure.temperature.test",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

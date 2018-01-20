@@ -1,8 +1,8 @@
 {
-  "name": "CureRef",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "Cure-Temp",
+  "version": "1.0.0",
+  "author": "Eng. Maohmmed Zaki",
+  "homepage": "https://www.linkedin.com/in/mohammed-zaki-9079185b/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -37,5 +37,5 @@
     "@ionic/app-scripts": "3.1.8",
     "typescript": "2.4.2"
   },
-  "description": "An Ionic project"
+  "description": "Cure-Temp app for Cure Group company."
 }
