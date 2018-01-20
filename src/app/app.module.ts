@@ -9,10 +9,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/providers';
-import { User } from '../providers/providers';
-import { Api } from '../providers/providers';
 import { MyApp } from './app.component';
 
 // The translate loader needs to know where to load i18n files
@@ -58,9 +55,6 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   providers: [
-    Api,
-    Items,
-    User,
     Camera,
     SplashScreen,
     StatusBar,

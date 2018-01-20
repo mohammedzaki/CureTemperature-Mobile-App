@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Cure-Temp",
+  "short_name": "Cure-Temp",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
