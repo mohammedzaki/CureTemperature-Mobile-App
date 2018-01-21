@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Nav } from 'ionic-angular';
-import { MainPage } from "../pages";
-import { HomePage } from "../home/home";
+import { IonicPage, Nav, NavController } from 'ionic-angular';
+import { HomePage, DevicesPage, DeviceHistoryPage, AboutPage } from "../pages";
 
 export interface PageInterface {
     title: string;
@@ -17,19 +16,22 @@ export interface PageInterface {
     templateUrl: 'menu.html'
 })
 export class MenuPage {
-    rootPage = MainPage;
-
+    // A reference to the ion-nav in our component
     @ViewChild(Nav) nav: Nav;
+
+    rootPage: any = HomePage;
+
     pages: PageInterface[];
 
-    constructor() {
+    constructor(public navCtrl: NavController) {
 
         // used for an example of ngFor and navigation
         this.pages = [
-            { title: 'Home', pageName: 'HomePage', component: HomePage, index: 0, icon: 'ios-home' },
-            //{ title: 'Devices', pageName: 'DevicesPage', component: DevicesPage, index: 1, icon: 'ios-cart' },
-            //{ title: 'Device History', pageName: 'DeviceHistoryPage', component: DeviceHistoryPage, index: 3, icon: 'contacts' },
-            //{ title: 'About', pageName: 'AboutPage', component: AboutPage, index: 4, icon: 'information-circle' }
+            { title: 'HOME', pageName: 'HomePage', component: HomePage, index: 0, icon: 'ios-home' },
+            { title: 'DEVICES', pageName: 'DevicesPage', component: DevicesPage, index: 1, icon: 'ios-cart' },
+            { title: 'HISTORY', pageName: 'DeviceHistoryPage', component: DeviceHistoryPage, index: 2, icon: 'contacts' },
+            { title: 'ABOUT US', pageName: 'AboutPage', component: AboutPage, index: 3, icon: 'information-circle' },
+            { title: 'LOGOUT', pageName: 'LOGOUT', component: AboutPage, index: 4, icon: 'information-circle' }
         ];
 
     }

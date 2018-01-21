@@ -11,6 +11,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { Settings } from '../providers/providers';
 import { MyApp } from './app.component';
+import { PagesModule } from "../pages/pages.module";
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -48,7 +49,8 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    PagesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
