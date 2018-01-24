@@ -41,7 +41,7 @@ page-loading {
                     -moz-animation: scaleA 1.5s ease-in-out infinite;
                     -ms-animation: scaleA 1.5s ease-in-out infinite;
                     animation: scaleA 1.5s ease-in-out infinite;
-                    background-color: #f64747;
+                    background-color: map-get($colors, mainRedColor);
                     left: 0%
                 }
 
@@ -50,7 +50,7 @@ page-loading {
                     -moz-animation: scaleB 1.5s ease-in-out infinite;
                     -ms-animation: scaleB 1.5s ease-in-out infinite;
                     animation: scaleB 1.5s ease-in-out infinite;
-                    background-color: #4183d7;
+                    background-color: map-get($colors, mainBlueColor);
                     left: 33%
                 }
 
@@ -59,7 +59,7 @@ page-loading {
                     -moz-animation: scaleC 1.5s ease-in-out infinite;
                     -ms-animation: scaleC 1.5s ease-in-out infinite;
                     animation: scaleC 1.5s ease-in-out infinite;
-                    background-color: #f64747;
+                    background-color: map-get($colors, mainRedColor);
                     left: 66%
                 }
 
@@ -68,7 +68,7 @@ page-loading {
                     -moz-animation: scaleD 1.5s ease-in-out infinite;
                     -ms-animation: scaleD 1.5s ease-in-out infinite;
                     animation: scaleD 1.5s ease-in-out infinite;
-                    background-color: #4183d7;
+                    background-color: map-get($colors, mainBlueColor);
                     left: 100%
                 }
 
