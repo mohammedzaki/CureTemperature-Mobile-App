@@ -1,32 +1,20 @@
-<ion-menu [content]="content">
-
-  <!--<ion-header>
-    <ion-toolbar>
-      <ion-title>MENU</ion-title>
-    </ion-toolbar>
-  </ion-header>-->
-
-  <ion-content>
-      <div id="menu-container2">
-      <ion-list id="menu-list3">
-        <ion-item color="none" id="menu-list-item6">
-          <ion-thumbnail item-left>
-            <img src="assets/img/app-logo.png" />
-          </ion-thumbnail>
-          <h2>
-            Cure Temp App
-          </h2>
-        </ion-item>
-      </ion-list>
-    </div>
-    <ion-list class="listStyle">
-      <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="menuItem">
-        <ion-note  class="menuTitle">{{p.title}}</ion-note>
-        <ion-icon name="arrow-forward" item-right></ion-icon>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-
+<ion-menu [content]="content"  >
+    <ion-content class="menu-content" id="page-menu">
+        <div class="menu-items">
+            <div class="menu-header">
+                <img src="assets/img/app-logo.png" />
+                <h6>
+                    Cure Temp App
+                </h6>
+            </div>
+            <ion-list class="listStyle">
+                <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="menu-item">
+                    <ion-note  [color]="isActive(p)" class="menu-title">{{p.title}}</ion-note>
+                    <ion-icon [color]="isActive(p)" name="ios-arrow-forward" item-end class="forward-icon "></ion-icon>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
 </ion-menu>
 
 <ion-nav id="nav" #content swipe-back-enabled="false" [root]="rootPage"></ion-nav>
