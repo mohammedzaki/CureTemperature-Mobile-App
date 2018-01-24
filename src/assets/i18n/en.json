@@ -2,9 +2,9 @@
   "BACK_BUTTON_TEXT": "Back",
 
   "NAME": "Name",
-  "EMAIL": "Email",
+  "EMAIL": "EMAIL",
   "USERNAME": "Username",
-  "PASSWORD": "Password",
+  "PASSWORD": "PASSWORD",
   "LOGIN": "Sign in",
   "SIGNUP": "Sign up",
 
@@ -42,9 +42,9 @@
 
   "WELCOME_TITLE": "Welcome",
 
-  "LOGIN_TITLE": "Sign in",
+  "LOGIN_TITLE": "Log in",
   "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
-  "LOGIN_BUTTON": "Sign in",
+  "LOGIN_BUTTON": "SIGN IN",
   "SIGNUP_TITLE": "Sign up",
   "SIGNUP_ERROR": "Unable to create account. Please check your account information and try again.",
   "SIGNUP_BUTTON": "Sign up",

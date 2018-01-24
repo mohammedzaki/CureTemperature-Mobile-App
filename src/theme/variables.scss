@@ -29,7 +29,8 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  assertive:  #F64646
 );
 
 
@@ -70,7 +71,8 @@ $colors: (
 // http://ionicframework.com/docs/v2/ionicons/
 
 @import "ionic.ionicons";
-
+@import "common";
+@import "navbar";
 
 // Fonts
 // --------------------------------------------------

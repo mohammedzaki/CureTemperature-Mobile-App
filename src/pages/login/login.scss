@@ -1,2 +1,63 @@
 page-login {
+    ion-content {
+        .scroll-content {
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            position: absolute;
+            z-index: 1;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            will-change: scroll-position;
+            contain: size style layout;
+            display: table;
+            vertical-align: middle;
+            width: 100%;
+            height: 100%;
+        }
+
+        .page-content {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+
+            .btn-div {
+                width: 17rem;
+                margin: auto;
+                margin-top: auto;
+                margin-top: 10rem;
+
+                button {
+                    border-radius: 2.3rem;
+                }
+            }
+
+        }
+    }
+    .list {
+        .item {
+            background: none;
+
+            &:first-child {
+                border-top: none;
+            }
+        }
+    }
+    .toolbar {
+        width: 94%;
+        margin: auto;
+        min-height: 5.5rem;
+
+        .toolbar-background {
+            background: none;
+        }
+    }
+    ion-title {
+        .toolbar-title {
+            font-size: 2.5rem;
+            font-weight: 100;
+        }
+    }
 }
