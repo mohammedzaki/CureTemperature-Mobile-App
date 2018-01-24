@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, ToastController, Nav, NavController } from 'ionic-angular';
 
-import { MainPage } from '../pages';
+import { MainPage, HomePage } from '../pages';
 
 @IonicPage()
 @Component({
@@ -10,9 +10,7 @@ import { MainPage } from '../pages';
     templateUrl: 'login.html'
 })
 export class LoginPage {
-    // A reference to the ion-nav in our component
-    @ViewChild(Nav) nav: Nav;
-
+    
     // The account fields for the login form.
     // If you're using the username field with or without email, make
     // sure to add it to the type
@@ -36,8 +34,6 @@ export class LoginPage {
 
     // Attempt to login in through our User service
     doLogin() {
-
-        this.navCtrl.push(MainPage);
-
+        this.navCtrl.setRoot(MainPage);
     }
 }
