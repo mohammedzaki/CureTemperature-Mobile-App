@@ -17,3 +17,4 @@ export * from './devices/devices';
 export * from './about/about';
 export * from './login/login';
 export * from './loading/loading';
+export * from './notification-modal/notification-modal'
