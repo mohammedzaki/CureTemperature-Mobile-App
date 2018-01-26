@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "815268856587",
+    "firebase_url": "https://curetemperature.firebaseio.com",
+    "project_id": "curetemperature",
+    "storage_bucket": "curetemperature.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815268856587:android:0340e3e76f8f8fdf",
+        "android_client_info": {
+          "package_name": "com.zaki.cure.temperature.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815268856587-sjbgiek12mlgr82bui0r88fm2k0pj1en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPCyP9FqbJmqn--Jhn36lha7OmQmQvWMc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
