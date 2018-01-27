@@ -7,5 +7,9 @@ gauge {
 }
 
 .kw-holder{
-    transform: translate(100px, 100px) rotate(126deg);
+    transform: translate(100px, 100px) rotate(-90deg); //rotate(126deg);
+}
+
+.kw-label {
+    font-weight: bold;
 }
