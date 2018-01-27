@@ -30,8 +30,8 @@ export class MenuPage {
             { title: 'HOME', pageName: 'HomePage', component: HomePage, index: 0, icon: 'ios-home' },
             { title: 'DEVICES', pageName: 'DevicesPage', component: DevicesPage, index: 1, icon: 'ios-cart' },
             { title: 'HISTORY', pageName: 'DeviceHistoryPage', component: DeviceHistoryPage, index: 2, icon: 'contacts' },
-            { title: 'ABOUT US', pageName: 'AboutPage', component: AboutPage, index: 3, icon: 'information-circle' },
             { title: 'NOTIFICATIONS', pageName: 'NotificationModal', component: NotificationModal, index: 4, icon: 'information-circle' },
+            { title: 'ABOUT US', pageName: 'AboutPage', component: AboutPage, index: 3, icon: 'information-circle' },
             { title: 'LOGOUT', pageName: 'LoginPage', component: LoginPage, index: 5, icon: 'information-circle' }
         ];
 
