@@ -32,9 +32,13 @@ export interface Device {
     
     descriptoin?: string;
 
-    temp?: number;
+    temp?: string;
     
     alarm?: boolean;
+    
+    reverse?: boolean;
+    
+    percentage?: number;
     
     labels?: any;
     

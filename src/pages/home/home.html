@@ -14,25 +14,11 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding id="page-home" class="has-background">
+            
     <ion-grid>
         <ion-row>
             <ion-col col-6 *ngFor="let device of devices; let i = index">
-                     <div class="device-container">
-                    <ng-gauge
-                        [bgRadius] = progressGraph.bgRadius
-                        [bgColor] = progressGraph.bgColor
-                        [rounded] = progressGraph.rounded
-                        [reverse] = progressGraph.reverse
-                        [animationSecs] = progressGraph.animationSecs
-                        [labels] = progressGraph.labels
-                        [segments] = progressGraph.segments > </ng-gauge>
-                    <div>
-                        {{ device.hospital }}
-                    </div>
-                    <div>
-                        {{ device.place }}
-                    </div>
-                </div>
+                <temp-device [device] = device></temp-device>
             </ion-col>
         </ion-row>
     </ion-grid>

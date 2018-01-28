@@ -6,8 +6,13 @@ gauge {
     fill: transparent;
 }
 
-.kw-holder{
-    transform: translate(100px, 100px) rotate(-90deg); //rotate(126deg);
+.kw-holder {
+    &.normal {
+        transform: translate(100px, 100px) rotate(-90deg) scaleY(1); //rotate(126deg);
+    }
+    &.reverse {
+        transform: translate(100px, 100px) rotate(-90deg) scaleY(-1); //rotate(126deg);
+    }
 }
 
 .kw-label {

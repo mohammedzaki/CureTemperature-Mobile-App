@@ -45,7 +45,7 @@ export function provideSettings(storage: Storage) {
     BrowserModule,
     HttpClientModule,
     ProvidersModule,
-    ComponentsModule,
+    
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
