@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Platform, ToastController, AlertController } from "ionic-angular";
 import { Firebase } from "@ionic-native/firebase";
-import { UserProfileApi } from "../api";
+import { UserAPIService } from "../api";
 import { AppConstants } from "../index";
 
 @Injectable()
@@ -11,7 +11,7 @@ export class AppNotification {
         private platform: Platform,
         private toastCtrl: ToastController,
         private firebase: Firebase,
-        private userProfileApi: UserProfileApi,
+        private userProfileApi: UserAPIService,
         private alertCtrl: AlertController) {
 
     }

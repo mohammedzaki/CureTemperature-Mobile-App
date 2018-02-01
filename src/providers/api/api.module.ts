@@ -1,18 +1,31 @@
-import { NgModule } from '@angular/core';
-import { LoginApi } from "./index";
-import { APIConstants } from "./api-constants";
-import { HttpModule } from "@angular/http";
-import { UserProfileApi } from "./UserProfileApi";
-
+import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { Configuration } from './configuration';
+import { UserAPIService } from './services/userAPI.service';
 
 @NgModule({
     imports: [
-        HttpModule
+        CommonModule,
+        HttpClientModule
     ],
+    declarations: [],
+    exports: [],
     providers: [
-        APIConstants,
-        LoginApi,
-        UserProfileApi
+        UserAPIService
     ]
 })
-export class APIModule { }
+export class APIModule {
+    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
+        return {
+            ngModule: APIModule,
+            providers: [ { provide: Configuration, useFactory: configurationFactory }]
+        }
+    }
+
+    constructor( @Optional() @SkipSelf() parentModule: APIModule) {
+        if (parentModule) {
+            throw new Error('ApiModule is already loaded. Import your base AppModule only.');
+        }
+    }
+}
