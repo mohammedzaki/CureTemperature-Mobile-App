@@ -22,7 +22,7 @@ export class LoginPage {
         public navCtrl: NavController,
         public toastCtrl: ToastController,
         public translateService: TranslateService,
-        private LoginApi: UserAPIService,
+        private loginApi: UserAPIService,
         public loadingCtrl: LoadingController) {
         this.account = {
             grantType: APIConstants.GRANT_TYPE,
@@ -42,7 +42,7 @@ export class LoginPage {
             content: 'Please wait...'
         });
         loading.present();
-        this.LoginApi.apiLogin(this.account).subscribe(res => {
+        this.loginApi.apiLogin(this.account).subscribe(res => {
             if (res.success && res.returnObject !== null) {
 
                 var storage = window.localStorage;

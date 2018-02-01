@@ -17,6 +17,11 @@ export class HomePage {
         public navCtrl: NavController,
         private modalCtrl: ModalController,
         private appNotification: AppNotification) {
+    }
+    
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad HomePage');
+        this.appNotification.setAppNotification();
         this.setDevices();
     }
 
@@ -65,11 +70,6 @@ export class HomePage {
         ];
     }
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad HomePage');
-        this.appNotification.setAppNotification();
-    }
-
     openNotification() {
         console.log('open Notifications');
         let modal = this.modalCtrl.create(NotificationModal);
@@ -77,9 +77,6 @@ export class HomePage {
     }
 
     openSelectDevices() {
-        //let params = {};
-
         this.navCtrl.setRoot(DevicesPage);
-
     }
 }

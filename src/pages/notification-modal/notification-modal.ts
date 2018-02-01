@@ -9,8 +9,9 @@ import {ViewController} from "ionic-angular";
 })
 export class NotificationModal {
 
-    private  notifications:any =[];
-    private  pharmacyId:number;
+    //private  notifications:any =[];
+    //private  pharmacyId:number;
+    
     constructor(
         public viewCtrl: ViewController,
         //private apiConst: APIConstants,

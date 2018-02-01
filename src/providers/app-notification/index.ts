@@ -63,15 +63,18 @@ export class AppNotification {
     }
 
     private callSaveDeviceToken(deviceToken, platform, uesrId) {
+        var storage = window.localStorage;
+        this.userProfileApi.configuration.accessToken = storage.getItem(AppConstants.API_ACCESS_TOKEN);
+        console.log('accessToken from UserAPIService: ' + this.userProfileApi.configuration.accessToken);
         this.userProfileApi.saveUserDeviceToken(deviceToken, platform, uesrId).subscribe(res => {
             if (res.success && res.returnObject !== null) {
 
             }
             console.log(res.message);
         }, err => {
-            console.log(err);
+            console.log(err.message);
             let toast = this.toastCtrl.create({
-                message: err,
+                message: err.message,
                 duration: 3000
             });
             toast.present();

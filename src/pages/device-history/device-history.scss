@@ -1,3 +1,24 @@
 page-device-history {
+    ion-tabs {
+        .tabbar {
+            position: absolute;
+            top: 0rem;
+            height: 5rem;
+            visibility: visible;
+            opacity: 1;
 
+            .tab-button .tab-button-text, .tab-button.has-title-only .tab-button-text {
+                line-height: 2;
+                padding: 0rem 1rem;
+            }
+            a[aria-selected=true] .tab-button-text {
+                border-width: 0px 0px 2px 0px;
+                border-style: solid; 
+
+            }
+        }
+        ion-tab {
+            top: 5rem;
+        }
+    }
 }

@@ -24,6 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { APIConstants } from "../api-constants";
+import { AppConstants } from "../../index";
 
 
 @Injectable()
@@ -147,7 +148,7 @@ export class UserAPIService {
             'application/json'
         ];
 
-        return this.httpClient.put<any>(`${this.basePath}/SaveDeviceToken/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.put<any>(`${this.basePath}/users/save-device-token/${encodeURIComponent(String(userId))}`,
             null,
             {
                 params: queryParameters,
@@ -156,5 +157,13 @@ export class UserAPIService {
             }
         );
     }
-
+    
+    public isAuthenticated(): boolean {
+        console.log("Auth: " + localStorage.getItem(AppConstants.USER_ID));
+        if (localStorage.getItem(AppConstants.USER_ID) !== null) {
+            return true;
+        }
+        return false;
+    }
+    
 }

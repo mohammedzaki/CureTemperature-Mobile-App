@@ -55,7 +55,8 @@ export function provideSettings(storage: Storage) {
     }),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    PagesModule
+    PagesModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
