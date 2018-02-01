@@ -10,10 +10,17 @@
  * Do not edit the class manually.
  */
 
-export interface LoginData {
-    grantType?: string;
-    clientId?: string;
-    clientSecret?: string;
+
+
+export interface User {
+    id?: number;
+    name?: string;
+    email?: string;
     username?: string;
     password?: string;
+    rememberToken?: string;
+    accessToken?: string;
+    expiresIn?: string;
+    refreshToken?: string;
+    tokenType?: string;
 }
