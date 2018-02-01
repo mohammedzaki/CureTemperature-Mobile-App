@@ -7,24 +7,26 @@
             Home
         </ion-title>
         <ion-buttons end>
-            <button ion-button icon-only right (click)="openNotification()" class="notfiyBtn">
-                    <ion-icon name="ios-notifications"></ion-icon>
+            <button id="notification-button" ion-button right (click)="openNotification()" class="notfiyBtn">
+                <ion-icon name="ios-notifications">
+                        <ion-badge id="notifications-badge" color="danger">5</ion-badge>
+                </ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
+
 <ion-content padding id="page-home" class="has-background">
-            
     <ion-grid>
         <ion-row>
             <ion-col col-6 *ngFor="let device of devices; let i = index">
-                <temp-device [device] = device></temp-device>
+                     <temp-device [device] = device></temp-device>
             </ion-col>
         </ion-row>
     </ion-grid>
     <ion-footer no-shadow position="bottom">
         <div padding class="btn-div" style="width: 100%;">
-            <button ion-button color="assertive" block class="btnLogin">Select Devices</button>
+            <button ion-button color="assertive" block class="btnLogin" (click)="openSelectDevices()">Select Devices</button>
         </div>
     </ion-footer>
 </ion-content>

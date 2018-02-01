@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController } from 'ionic-angular';
-import { NotificationModal } from "../pages";
-import { GaugeSegment, GaugeLabel } from "../../components/gauge/index";
+import { NotificationModal, DevicesPage } from "../pages";
 import { AppNotification } from "../../providers/index";
 import { Device } from "../../models";
 
@@ -77,4 +76,10 @@ export class HomePage {
         modal.present();
     }
 
+    openSelectDevices() {
+        //let params = {};
+
+        this.navCtrl.setRoot(DevicesPage);
+
+    }
 }
