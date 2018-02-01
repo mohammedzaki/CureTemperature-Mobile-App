@@ -1,8 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, ToastController, Nav, NavController } from 'ionic-angular';
+import { IonicPage, ToastController, NavController, LoadingController } from 'ionic-angular';
 
-import { MainPage, HomePage } from '../pages';
+import { MainPage } from '../pages';
+import { UserAPIService, APIConstants } from "../../providers/api";
+import { LoginData } from "../../models";
+import { AppConstants } from "../../providers";
 
 @IonicPage()
 @Component({
@@ -10,23 +13,24 @@ import { MainPage, HomePage } from '../pages';
     templateUrl: 'login.html'
 })
 export class LoginPage {
-    
-    // The account fields for the login form.
-    // If you're using the username field with or without email, make
-    // sure to add it to the type
-    account: { email: string, password: string } = {
-        email: '',
-        password: ''
-    };
 
+    public account: LoginData;
     // Our translated text strings
     private loginErrorString: string;
 
     constructor(
         public navCtrl: NavController,
         public toastCtrl: ToastController,
-        public translateService: TranslateService) {
-
+        public translateService: TranslateService,
+        private LoginApi: UserAPIService,
+        public loadingCtrl: LoadingController) {
+        this.account = {
+            grantType: APIConstants.GRANT_TYPE,
+            clientId: APIConstants.CLIENT_ID,
+            clientSecret: APIConstants.CLIENT_SECRET,
+            password: "123456789",
+            username: "test@test.com"
+        };
         this.translateService.get('LOGIN_ERROR').subscribe((value) => {
             this.loginErrorString = value;
         });
@@ -34,6 +38,30 @@ export class LoginPage {
 
     // Attempt to login in through our User service
     doLogin() {
-        this.navCtrl.setRoot(MainPage);
+        let loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        loading.present();
+        this.LoginApi.apiLogin(this.account).subscribe(res => {
+            if (res.success && res.returnObject !== null) {
+
+                var storage = window.localStorage;
+                storage.setItem(AppConstants.API_ACCESS_TOKEN, res.returnObject.access_token);
+                storage.setItem(AppConstants.USER_ID, res.returnObject.id);
+                
+                console.log(" after login: ", res.returnObject);
+                loading.dismiss();
+                this.navCtrl.setRoot(MainPage);
+            }
+        }, err => {
+            loading.dismiss();
+            let toast = this.toastCtrl.create({
+                message: err,
+                duration: 6000
+            });
+            console.log(err);
+            toast.present();
+        });
     }
+
 }
