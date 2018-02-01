@@ -1,27 +1,4 @@
-/**
- * @category   Model
- * @package    com.kiwity.gauge.gauge
- * @author     Salvador Subarroca (subarroca@gmail.com)
-**/
-
-
-
-
-// ANGULAR
-
-
-
-
-// EXTERNAL
-
-
-
-
-// OWN
-
-
-
-
+import { colors } from "../../shared/colors";
 
 export class GaugeSegment {
     radius: number;
@@ -51,8 +28,8 @@ export class GaugeSegment {
         this.bgColor = options.bgColor || 'transparent';
         this.borderWidth = options.borderWidth || 100;
         this.gradient = options.gradient || {
-            start: 'transparent',
-            end: 'transparent'
+            start: colors.gray,
+            end: colors.gray
         };
     }
 

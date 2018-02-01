@@ -1,27 +1,3 @@
-/**
- * @category   Model
- * @package    com.kiwity.gauge.gauge
- * @author     Salvador Subarroca (subarroca@gmail.com)
-**/
-
-
-
-
-// ANGULAR
-
-
-
-
-// EXTERNAL
-
-
-
-
-// OWN
-
-
-
-
 
 export class GaugeLabel {
   color: string;

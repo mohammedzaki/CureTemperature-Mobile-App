@@ -1,0 +1,34 @@
+<div class="device-container">
+    <ion-grid>
+        <ion-row>
+            <ion-col col-4>
+                <div class="gauge-container">
+                    <ng-gauge
+                        [bgRadius] = progressGraph.bgRadius
+                        [bgColor] = progressGraph.bgColor
+                        [rounded] = progressGraph.rounded
+                        [reverse] = progressGraph.reverse
+                        [animationSecs] = progressGraph.animationSecs
+                        [labels] = progressGraph.labels
+                        [segments] = progressGraph.segments > </ng-gauge>
+                </div>
+            </ion-col>
+            <ion-col col-8>
+                <div class="device-detials">
+                    <div class="hospital">
+                        {{ device.hospital }}
+                    </div>
+                    <div class="place">
+                        {{ device.place }}
+                    </div>
+                    <div class="descriptoin">
+                        {{ device.descriptoin }}
+                    </div>
+                </div>
+
+                <button ion-button color="assertive" block class="btnAddHome">ADD TO HOME</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</div>

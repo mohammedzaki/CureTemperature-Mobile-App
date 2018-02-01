@@ -1,22 +1,23 @@
 import { Component, Input } from '@angular/core';
 import { GaugeLabel, GaugeSegment } from "../gauge";
-import { Device } from "../../models";
 import { colors } from "../shared/colors";
+import { Device } from "../../models";
+
 /**
- * Generated class for the TempDeviceComponent component.
+ * Generated class for the TempDeviceItemComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
 @Component({
-    selector: 'temp-device',
-    templateUrl: 'temp-device.html'
+    selector: 'temp-device-item',
+    templateUrl: 'temp-device-item.html'
 })
-export class TempDeviceComponent {
+export class TempDeviceItemComponent {
 
     @Input() device: Device = {};
     progressGraph: any;
-    
+
     constructor() {
         console.log('Hello TempDeviceComponent Component');
     }
@@ -58,5 +59,5 @@ export class TempDeviceComponent {
             ]
         };
     }
-    
+
 }
