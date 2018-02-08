@@ -8,8 +8,8 @@
         </ion-title>
         <ion-buttons end>
             <button id="notification-button" ion-button right (click)="openNotification()" class="notfiyBtn">
-                <ion-icon name="ios-notifications">
-                        <ion-badge id="notifications-badge" color="danger">5</ion-badge>
+                    <ion-icon name="ios-notifications">
+                    <ion-badge id="notifications-badge" color="danger">5</ion-badge>
                 </ion-icon>
             </button>
         </ion-buttons>
@@ -17,6 +17,15 @@
 </ion-header>
 
 <ion-content padding id="page-home" class="has-background">
+    <ion-card>
+        <ion-card-header>
+            Account Details
+        </ion-card-header>
+        <ion-card-content>
+            Organization: Hospital <br>
+            Place: Cairo
+        </ion-card-content>
+    </ion-card>
     <ion-grid>
         <ion-row>
             <ion-col col-6 *ngFor="let device of devices; let i = index">
