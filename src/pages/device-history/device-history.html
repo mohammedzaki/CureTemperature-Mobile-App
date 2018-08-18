@@ -8,12 +8,98 @@
         </ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content padding id="device-history-page">
-    <!-- Text -->
-    <ion-tabs tabs-only color="dark" selectedIndex="1">
-        <ion-tab tabTitle="Day" [root]="tab1Root"></ion-tab>
-        <ion-tab tabTitle="Week" [root]="tab2Root"></ion-tab>
-        <ion-tab tabTitle="Month" [root]="tab3Root"></ion-tab>
-        <ion-tab tabTitle="Rang" [root]="tab4Root"></ion-tab>
-    </ion-tabs>
+
+<ion-content class="device-history-page-segment">
+
+    <div class="rangselector-container">
+        <ion-segment [(ngModel)]="rangselector">
+            <ion-segment-button value="day" (ionSelect)="setSelected('day')">
+                Day
+            </ion-segment-button>
+            <ion-segment-button value="week" (ionSelect)="setSelected('week')">
+                Week
+            </ion-segment-button>
+            <ion-segment-button value="month" (ionSelect)="setSelected('month')">
+                Month
+            </ion-segment-button>
+            <ion-segment-button value="rang" (ionSelect)="setSelected('rang')">
+                Rang
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+    <div class="device-container">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-8>
+                    <div class="device-detials">
+                        <div class="hospital">
+                            Org: {{ account.name }}
+                        </div>
+                        <div class="place">
+                            Location: {{ account.place }}
+                        </div>
+                        <div class="name">
+                            Device: {{ device.name }}
+                        </div>
+                        <div class="description">
+                            Desc: {{ device.description }}
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col col-4>
+                    <button ion-button color="assertive" block class="btn-change" (click)="openSelectDeviceModal()">CHOOSE<br/>DEVICE</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <div [ngSwitch]="rangselector" class="rangselector-content">
+
+        <ion-list *ngSwitchCase="'day'">
+            <ion-item>
+                <ion-label>Select Day</ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="selectedDayDate"></ion-datetime>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'week'">
+            <ion-item>
+                <ion-label>Select week</ion-label>
+                <ion-datetime displayFormat="MMMM YYYY" [(ngModel)]="selectedMonthWeek"></ion-datetime>
+                <ion-select [(ngModel)]="selectedWeek">
+                    <ion-option value='0'>1st</ion-option>
+                    <ion-option value='1'>2nd</ion-option>
+                    <ion-option value='2'>3tr</ion-option>
+                    <ion-option value='3'>4th</ion-option>
+                    <ion-option value='4'>5th</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'month'">
+            <ion-item>
+                <ion-label>Select Month</ion-label>
+                <ion-datetime displayFormat="MMMM YYYY" [(ngModel)]="selectedMonth"></ion-datetime>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'rang'">
+            <ion-item>
+                <ion-label>Start Date</ion-label>
+                <ion-datetime displayFormat="MM DD YYYY h:mm A" [(ngModel)]="selectedStartDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>End Date</ion-label>
+                <ion-datetime displayFormat="MM DD YYYY h:mm A" [(ngModel)]="selectedEndDate"></ion-datetime>
+            </ion-item>
+        </ion-list>
+        
+        <ion-col col-4 class="btn-submit-col">
+            <button ion-button color="assertive" block (click)="getDeviceHistory()" >SUBMIT</button>
+        </ion-col>
+    </div>
+
+</ion-content>
+
+<ion-content class="device-history-page-content">
+    <canvas class="graph" #lineCanvas></canvas>
 </ion-content>

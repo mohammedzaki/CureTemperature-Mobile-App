@@ -1,6 +1,6 @@
 /**
- * Cure Temprature App
- * Cure Temprature APIs
+ * Cure-Temperature APIs
+ * This is Cure-Temperature server. You can use the api key `special-key` to test the authorization filters.
  *
  * OpenAPI spec version: 1.0.0
  * Contact: mohammedzaki.dev@gmail.com
@@ -13,14 +13,44 @@
 
 
 export interface User {
+    /**
+     * id
+     */
     id?: number;
+    /**
+     * name
+     */
     name?: string;
+    /**
+     * email
+     */
     email?: string;
-    username?: string;
+    /**
+     * password
+     */
     password?: string;
+    /**
+     * device_token
+     */
+    deviceToken?: string;
+    /**
+     * rememberToken
+     */
     rememberToken?: string;
+    /**
+     * accessToken
+     */
     accessToken?: string;
+    /**
+     * expiresIn
+     */
     expiresIn?: string;
+    /**
+     * refreshToken
+     */
     refreshToken?: string;
+    /**
+     * tokenType
+     */
     tokenType?: string;
 }

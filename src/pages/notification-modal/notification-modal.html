@@ -13,36 +13,15 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card>
+    <ion-card *ngFor="let device of devices; let i = index" id="device-item{{i}}">
         <ion-card-header>
             <ion-row>
-                <ion-col  text-left>Order#: <ion-note class="notes">8</ion-note></ion-col>
-                <ion-col text-end>Status: <ion-note class="notes">New Order</ion-note></ion-col>
+                <ion-col text-left>Device Name: <ion-note class="notes">{{ device.name }}</ion-note></ion-col>
             </ion-row>
         </ion-card-header>
         <ion-card-content>
             <ion-row>
-                <ion-col text-left>Client Name: <ion-note class="notes">Ahmed gaber</ion-note></ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col text-left>Client Location:<ion-note class="notes">XX.al 3roba street 23</ion-note></ion-col>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-        <ion-card-header>
-            <ion-row>
-                <ion-col  text-left>Order#: <ion-note class="notes">9</ion-note></ion-col>
-                <ion-col text-end>Status: <ion-note class="notes">Request Drugs</ion-note></ion-col>
-            </ion-row>
-        </ion-card-header>
-        <ion-card-content>
-            <ion-row>
-                <ion-col text-left>Client Name: <ion-note class="notes">sami ali</ion-note></ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col text-left>Client Location:<ion-note class="notes">XX.al nozha street 2</ion-note></ion-col>
+                <ion-col text-left>Current Temp: <ion-note class="notes">{{ device.temp }}</ion-note></ion-col>
             </ion-row>
         </ion-card-content>
     </ion-card>

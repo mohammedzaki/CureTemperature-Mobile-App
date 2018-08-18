@@ -25,15 +25,26 @@ export class LoginPage {
         private loginApi: UserAPIService,
         public loadingCtrl: LoadingController) {
         this.account = {
-            grantType: APIConstants.GRANT_TYPE,
             clientId: APIConstants.CLIENT_ID,
             clientSecret: APIConstants.CLIENT_SECRET,
             password: "123456789",
-            username: "test@test.com"
+            username: "mohammedzaki.dev@gmail.com"
         };
         this.translateService.get('LOGIN_ERROR').subscribe((value) => {
             this.loginErrorString = value;
         });
+    }
+
+    ngOnInit() {
+        var storage = window.localStorage;
+        var userPerferedDevices = storage.getItem(AppConstants.USER_PREFERED_DEVICES);
+        userPerferedDevices = JSON.stringify({
+            uL: -1,
+            uR: -1,
+            dL: -1,
+            dR: -1
+        });
+        storage.setItem(AppConstants.USER_PREFERED_DEVICES, userPerferedDevices);
     }
 
     // Attempt to login in through our User service
@@ -48,7 +59,7 @@ export class LoginPage {
                 var storage = window.localStorage;
                 storage.setItem(AppConstants.API_ACCESS_TOKEN, res.returnObject.access_token);
                 storage.setItem(AppConstants.USER_ID, res.returnObject.id);
-                
+
                 console.log(" after login: ", res.returnObject);
                 loading.dismiss();
                 this.navCtrl.setRoot(MainPage);

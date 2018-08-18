@@ -2,7 +2,9 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Configuration } from './configuration';
-import { UserAPIService } from './services/userAPI.service';
+import { UserAPIService } from './index';
+import { UserDevicesService } from "./index";
+import { DeviceService } from "./index";
 
 @NgModule({
     imports: [
@@ -12,7 +14,9 @@ import { UserAPIService } from './services/userAPI.service';
     declarations: [],
     exports: [],
     providers: [
-        UserAPIService
+        UserAPIService,
+        UserDevicesService,
+        DeviceService
     ]
 })
 export class APIModule {

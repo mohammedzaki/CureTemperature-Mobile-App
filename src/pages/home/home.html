@@ -6,36 +6,46 @@
         <ion-title>
             Home
         </ion-title>
-        <ion-buttons end>
+        <!--<ion-buttons end>
             <button id="notification-button" ion-button right (click)="openNotification()" class="notfiyBtn">
                     <ion-icon name="ios-notifications">
                     <ion-badge id="notifications-badge" color="danger">5</ion-badge>
                 </ion-icon>
             </button>
-        </ion-buttons>
+        </ion-buttons>-->
     </ion-navbar>
 </ion-header>
 
-<ion-content padding id="page-home" class="has-background">
+<ion-content padding class="has-background">
     <ion-card>
         <ion-card-header>
-            Account Details
+            Location Details
         </ion-card-header>
         <ion-card-content>
-            Organization: Hospital <br>
-            Place: Cairo
+            Organization: {{ account.name }} <br>
+            Place: {{ account.place }}
         </ion-card-content>
     </ion-card>
     <ion-grid>
         <ion-row>
-            <ion-col col-6 *ngFor="let device of devices; let i = index">
-                     <temp-device [device] = device></temp-device>
+            <ion-col col-6>
+                <temp-device [device] = deviceUL *ngIf="deviceUL.shouldShow"></temp-device>
+            </ion-col>
+            <ion-col col-6>
+                <temp-device [device] = deviceUR *ngIf="deviceUR.shouldShow"></temp-device>
+            </ion-col>
+            <ion-col col-6>
+                <temp-device [device] = deviceDL *ngIf="deviceDL.shouldShow"></temp-device>
+            </ion-col>
+            <ion-col col-6>
+                <temp-device [device] = deviceDR *ngIf="deviceDR.shouldShow"></temp-device>
             </ion-col>
         </ion-row>
     </ion-grid>
-    <ion-footer no-shadow position="bottom">
-        <div padding class="btn-div" style="width: 100%;">
-            <button ion-button color="assertive" block class="btnLogin" (click)="openSelectDevices()">Select Devices</button>
-        </div>
-    </ion-footer>
 </ion-content>
+
+<ion-footer no-shadow>
+    <div class="btn-div">
+        <button ion-button color="assertive" block class="btnLogin" (click)="openSelectDevices()">Select Devices</button>
+    </div>
+</ion-footer>

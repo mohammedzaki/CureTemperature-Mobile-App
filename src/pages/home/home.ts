@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, LoadingController, ToastController } from 'ionic-angular';
 import { NotificationModal, DevicesPage } from "../pages";
-import { AppNotification } from "../../providers/index";
-import { Device } from "../../models";
+import { AppNotification, AppConstants } from "../../providers/index";
+import { Device, Account } from "../../models";
+import { UserDevicesService } from "../../providers/api";
 
 @IonicPage()
 @Component({
@@ -11,63 +12,82 @@ import { Device } from "../../models";
 })
 export class HomePage {
 
-    devices: Device[] = [];
-
+    deviceUL: Device = {};
+    deviceUR: Device = {};
+    deviceDL: Device = {};
+    deviceDR: Device = {};
+    account: Account = {
+        name: 'Cure Group',
+        place: 'Sheraton'
+    };
+    userPerferedDevices;
+    
     constructor(
         public navCtrl: NavController,
         private modalCtrl: ModalController,
-        private appNotification: AppNotification) {
+        private appNotification: AppNotification,
+        private userDevicesService: UserDevicesService,
+        public toastCtrl: ToastController,
+        public loadingCtrl: LoadingController) {
     }
-    
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad HomePage');
         this.appNotification.setAppNotification();
         this.setDevices();
     }
 
+    getPerD() {
+        var storage = window.localStorage;
+        this.userPerferedDevices = JSON.parse(storage.getItem(AppConstants.USER_PREFERED_DEVICES));
+        return [ this.userPerferedDevices.uL, this.userPerferedDevices.uR, this.userPerferedDevices.dL, this.userPerferedDevices.dR ];
+    }
+
     setDevices() {
-        this.devices = [
-            {
-                id: 1,
-                place: 'alex',
-                hospital: 'el montza',
-                descriptoin: 'text of descriptions',
-                temp: '39.5',
-                percentage: 39.5,
-                reverse: false,
-                alarm: false
-            },
-            {
-                id: 2,
-                place: 'cairo',
-                hospital: 'Cairo Hospital',
-                descriptoin: 'text of descriptions Cairo Hospital',
-                temp: '- 20',
-                percentage: 20,
-                reverse: true,
-                alarm: false
-            },
-            {
-                id: 3,
-                place: 'port-said',
-                hospital: 'al soliman',
-                descriptoin: 'al soliman descriptions',
-                temp: '- 4',
-                percentage: 4,
-                reverse: true,
-                alarm: false
-            },
-            {
-                id: 4,
-                place: 'cairo',
-                hospital: 'kelopatra',
-                descriptoin: 'text of descriptions for kelopatra cairo',
-                temp: '73.34',
-                percentage: 73.34,
-                reverse: false,
-                alarm: false
+        let loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        loading.present();
+        var storage = window.localStorage;
+        let userId = storage.getItem(AppConstants.USER_ID);
+        this.userDevicesService.getUserDevices(userId, this.getPerD()).subscribe(res => {
+            if (res.success) {
+                if (res.data.account !== null) {
+                    this.account = res.data.account; 
+                }
+                res.data.devices.forEach((device) => {
+                    switch (device.id) {
+                        case this.userPerferedDevices.uL: 
+                            this.deviceUL = device;
+                            this.deviceUL.shouldShow = true;
+                            break;
+                        case this.userPerferedDevices.uR: 
+                            this.deviceUR = device;
+                            this.deviceUR.shouldShow = true;
+                            break;
+                        case this.userPerferedDevices.dL: 
+                            this.deviceDL = device;
+                            this.deviceDL.shouldShow = true;
+                            break;
+                        case this.userPerferedDevices.dR:
+                            this.deviceDR = device;
+                            this.deviceDR.shouldShow = true;
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                loading.dismiss();
             }
-        ];
+        }, err => {
+            loading.dismiss();
+            let toast = this.toastCtrl.create({
+                message: err,
+                duration: 6000
+            });
+            console.log(err);
+            toast.present();
+        });
     }
 
     openNotification() {
@@ -77,6 +97,6 @@ export class HomePage {
     }
 
     openSelectDevices() {
-        this.navCtrl.setRoot(DevicesPage);
+        this.navCtrl.push(DevicesPage);
     }
 }

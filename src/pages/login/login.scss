@@ -1,34 +1,24 @@
 page-login {
     ion-content {
         .scroll-content {
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            position: absolute;
-            z-index: 1;
-            overflow-x: hidden;
-            overflow-y: scroll;
-            -webkit-overflow-scrolling: touch;
-            will-change: scroll-position;
-            contain: size style layout;
+            position: relative;
             display: table;
             vertical-align: middle;
             width: 100%;
             height: 100%;
+            padding: 16px;
         }
-
+            
         .page-content {
             display: table-cell;
             vertical-align: middle;
             text-align: center;
-
+            
             .btn-div {
                 width: 17rem;
                 margin: auto;
-                margin-top: auto;
                 margin-top: 10rem;
-
+                
                 button {
                     border-radius: 2.3rem;
                 }
@@ -36,15 +26,18 @@ page-login {
 
         }
     }
+    
     .list {
         .item {
             background: none;
-
+            padding: 0px;
+            
             &:first-child {
                 border-top: none;
             }
         }
     }
+    
     .toolbar {
         width: 94%;
         margin: auto;
@@ -55,9 +48,11 @@ page-login {
             border: none;
         }
     }
+    
     .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
         background: none;
     }
+    
     ion-title {
         .toolbar-title {
             text-align: center;
@@ -67,6 +62,7 @@ page-login {
             font-family: -apple-system, "Helvetica Neue", "Roboto", sans-serif;
         }
     }
+    
     ion-header {
         ion-navbar {
             border-width: 0 0 0.55px;

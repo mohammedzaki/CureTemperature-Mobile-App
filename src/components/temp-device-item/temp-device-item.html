@@ -15,18 +15,15 @@
             </ion-col>
             <ion-col col-8>
                 <div class="device-detials">
-                    <div class="hospital">
-                        {{ device.hospital }}
-                    </div>
                     <div class="place">
-                        {{ device.place }}
+                        {{ device.name }}
                     </div>
-                    <div class="descriptoin">
-                        {{ device.descriptoin }}
+                    <div class="description">
+                        {{ device.description }}
                     </div>
                 </div>
 
-                <button ion-button color="assertive" block class="btnAddHome">ADD TO HOME</button>
+                <button ion-button color="assertive" block class="btnAddHome" (click)="addToHome()">ADD TO HOME</button>
             </ion-col>
         </ion-row>
     </ion-grid>

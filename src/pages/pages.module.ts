@@ -8,6 +8,7 @@ import { AboutPageModule } from "./about/about.module";
 import { LoginPageModule } from "./login/login.module";
 import { TabsControllerPageModule } from "./tabs-controller/tabs-controller.module";
 import { NotificationModalModule } from "./notification-modal/notification-modal.module";
+import { SelectDevicePageModule } from "./select-device/select-device.module";
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { NotificationModalModule } from "./notification-modal/notification-modal
         AboutPageModule,
         LoginPageModule,
         TabsControllerPageModule,
-        NotificationModalModule
+        NotificationModalModule,
+        SelectDevicePageModule
     ]
 })
 export class PagesModule { }

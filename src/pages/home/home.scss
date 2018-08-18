@@ -1,5 +1,4 @@
 page-home {
-    background: #FFFFFF;
     
     .card-ios, .card-md {
         margin: 5px 12px;
@@ -14,12 +13,12 @@ page-home {
             font-size: 1.6rem;
             font-weight: 500;
             color: #333;
-            padding: 10px 16px;
+            padding: 6px 16px;
         }
 
         .card-content-ios, .card-content-md {
-            padding: 13px 16px 10px;
-            padding-top: 2px;
+            padding: 5px 16px;
+            padding-top: 0px;
             font-size: 1.4rem;
             line-height: 1.4;
         }
@@ -33,12 +32,17 @@ page-home {
         overflow: visible!important;
     }
 
-
     #notifications-badge {
         background-color: red;
         position: absolute;
         top: -3px;
         right: -3px;
         border-radius: 100%;
+    }
+    
+    ion-footer {
+        .btn-div {
+            padding: 10px 20px;
+        }
     }
 }

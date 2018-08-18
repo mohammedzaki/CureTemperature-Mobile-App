@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-export interface LoginData {
-    grantType?: string;
-    clientId?: string;
-    clientSecret?: string;
-    username?: string;
-    password?: string;
+
+
+export interface APIResponse {
+    success?: boolean;
+    message?: string;
+    data?: any;
 }

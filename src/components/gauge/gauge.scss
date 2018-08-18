@@ -1,20 +1,22 @@
-gauge {
+ng-gauge {
+    display: block;
 
-}
-.kw-mid,
-.kw-front {
-    fill: transparent;
-}
-
-.kw-holder {
-    &.normal {
-        transform: translate(100px, 100px) rotate(-90deg) scaleY(1); //rotate(126deg);
+    .kw-mid,
+    .kw-front {
+        fill: transparent;
     }
-    &.reverse {
-        transform: translate(100px, 100px) rotate(-90deg) scaleY(-1); //rotate(126deg);
+
+    .kw-holder {
+        &.normal {
+            transform: translate(100px, 100px) rotate(-90deg) scaleY(1); //rotate(126deg);
+        }
+        &.reverse {
+            transform: translate(100px, 100px) rotate(-90deg) scaleY(-1); //rotate(126deg);
+        }
+    }
+
+    .kw-label {
+        font-weight: bold;
     }
 }
 
-.kw-label {
-    font-weight: bold;
-}

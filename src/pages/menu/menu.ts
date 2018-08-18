@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Nav, ModalController } from 'ionic-angular';
+import { IonicPage, Nav, ModalController, Platform } from 'ionic-angular';
 import { HomePage, DevicesPage, DeviceHistoryPage, AboutPage, LoginPage, NotificationModal } from "../pages";
+import { AppConstants } from "../../providers";
 
 export interface PageInterface {
     title: string;
@@ -23,20 +24,34 @@ export class MenuPage {
 
     pages: PageInterface[];
 
-    constructor(private modalCtrl:ModalController) {
-
+    constructor(private modalCtrl: ModalController, private platform: Platform) {
+        //this.platform = platform;
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'HOME', pageName: 'HomePage', component: HomePage, index: 0, icon: 'ios-home' },
             { title: 'DEVICES', pageName: 'DevicesPage', component: DevicesPage, index: 1, icon: 'ios-cart' },
             { title: 'HISTORY', pageName: 'DeviceHistoryPage', component: DeviceHistoryPage, index: 2, icon: 'contacts' },
-            { title: 'NOTIFICATIONS', pageName: 'NotificationModal', component: NotificationModal, index: 4, icon: 'information-circle' },
+            //{ title: 'NOTIFICATIONS', pageName: 'NotificationModal', component: NotificationModal, index: 4, icon: 'information-circle' },
             { title: 'ABOUT US', pageName: 'AboutPage', component: AboutPage, index: 3, icon: 'information-circle' },
-            { title: 'LOGOUT', pageName: 'LoginPage', component: LoginPage, index: 5, icon: 'information-circle' }
+            { title: 'LOGOUT', pageName: 'LoginPage', component: LoginPage, index: 5, icon: 'information-circle' },
+            { title: 'EXIT', pageName: 'LoginPage', component: LoginPage, index: 6, icon: 'information-circle' }
         ];
 
     }
 
+    ngOnInit() {
+        var storage = window.localStorage;
+        var userPerferedDevices = storage.getItem(AppConstants.USER_PREFERED_DEVICES);
+        if (userPerferedDevices === null) {
+            userPerferedDevices = JSON.stringify({
+                uL: -1,
+                uR: -1,
+                dL: -1,
+                dR: -1
+            });
+            storage.setItem(AppConstants.USER_PREFERED_DEVICES, userPerferedDevices);
+        }
+    }
 
     openPage(page: PageInterface) {
         let params = {};
@@ -50,6 +65,8 @@ export class MenuPage {
         } else*/ if (page.index == 4) {
             let modal = this.modalCtrl.create(NotificationModal);
             modal.present();
+        } else if(page.index == 6) {
+            this.platform.exitApp();
         } else {
             this.nav.setRoot(page.component, params);
         }
