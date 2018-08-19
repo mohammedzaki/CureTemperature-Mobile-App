@@ -3,25 +3,36 @@ import { Platform, ToastController, AlertController } from "ionic-angular";
 import { Firebase } from "@ionic-native/firebase";
 import { UserAPIService } from "../api";
 import { AppConstants } from "../index";
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AppNotification {
 
+    public userId: number;
+
     constructor(
         private platform: Platform,
         private toastCtrl: ToastController,
-        private firebase: Firebase,
+        private firebaseNative: Firebase,
         private userProfileApi: UserAPIService,
         private alertCtrl: AlertController) {
-
+        this.userId = +window.localStorage.getItem(AppConstants.USER_ID);
+        this.userProfileApi.configuration.accessToken = window.localStorage.getItem(AppConstants.API_ACCESS_TOKEN);
+        console.log('accessToken from UserAPIService: ' + this.userProfileApi.configuration.accessToken);
     }
 
-    private grantNotificationPermission() {
-        if (this.platform.is("ios")) {
-            this.firebase.grantPermission().then(granted => {
-                if (granted) {
-                    this.firebaseGetToken();
-                } else {
+    // Get permission from the user
+    async firebaseGetToken() {
+        let deviceToken;
+
+        if (this.platform.is('android')) {
+            deviceToken = await this.firebaseNative.getToken();
+        }
+
+        if (this.platform.is('ios')) {
+            deviceToken = await this.firebaseNative.getToken();
+            await this.firebaseNative.grantPermission().then(granted => {
+                if (!granted) {
                     this.alertCtrl.create({
                         title: "Permission",
                         message: "You wouldn't be able to receive any notifications."
@@ -30,42 +41,28 @@ export class AppNotification {
             }).catch(error => {
                 this.toastCtrl.create({ message: error });
             });
-        } else {
-            this.firebaseGetToken();
         }
+        return this.saveDeviceTokenToDatabase(deviceToken);
     }
 
-    private firebaseGetToken() {
-        this.firebase.getToken()
-            .then(deviceToken => {
-                this.setDeviceToken(deviceToken);
-            }).catch(error => {
-                console.log('Cure Temprature error: ' + error);
-            });
+    // Listen to incoming FCM messages
+    private listenToNotifications() {
+        this.firebaseNative.onNotificationOpen().pipe(
+            tap(this.onNotificationOpen)
+        ).subscribe();
     }
 
-    private firebaseOnTokenRefresh() {
-        this.firebase.onTokenRefresh()
-            .subscribe((deviceToken: string) => {
-                this.setDeviceToken(deviceToken);
-            });
-    }
-
-    private setDeviceToken(deviceToken: string) {
+    private saveDeviceTokenToDatabase(deviceToken: string) {
         console.log("Cure Temprature device Token: " + deviceToken);
-        var uesrId = +window.localStorage.getItem(AppConstants.USER_ID);
-        console.log("Cure Temprature USER_ID: " + uesrId);
+        console.log("Cure Temprature USER_ID: " + this.userId);
         if (this.platform.is('android')) {
-            this.callSaveDeviceToken(deviceToken, 'android', uesrId);
+            this.callSaveDeviceToken(deviceToken, 'android', this.userId);
         } else if (this.platform.is('ios')) {
-            this.callSaveDeviceToken(deviceToken, 'ios', uesrId);
+            this.callSaveDeviceToken(deviceToken, 'ios', this.userId);
         }
     }
 
-    private callSaveDeviceToken(deviceToken, platform, uesrId) {
-        var storage = window.localStorage;
-        this.userProfileApi.configuration.accessToken = storage.getItem(AppConstants.API_ACCESS_TOKEN);
-        console.log('accessToken from UserAPIService: ' + this.userProfileApi.configuration.accessToken);
+    private callSaveDeviceToken(deviceToken: string, platform: string, uesrId: number) {
         this.userProfileApi.saveUserDeviceToken(deviceToken, platform, uesrId).subscribe(res => {
             if (res.success && res.returnObject !== null) {
 
@@ -82,35 +79,19 @@ export class AppNotification {
     }
 
     private onNotificationOpen(data) {
-        alert('get notify');
         if (data.tap) {
             //Notification was received on device tray and tapped by the user.
-            alert('from outside: ' + JSON.stringify(data));
-            //let toast = this.toastCtrl.create({
-            //  message: data,
-            //  duration: 3000
-            //});
-            //toast.present();
-            //console.log(JSON.stringify(data));
+            alert('in background: ' + JSON.stringify(data));
+            console.log('in background: ' + JSON.stringify(data));
         } else if (!data.tap) {
             //Notification was received in foreground. Maybe the user needs to be notified.
-            console.log('from foreground: ' + JSON.stringify(data));
-            //  this.alertCtrl.create({
-            //    message: data
-            //  });
+            alert('in foreground: ' + JSON.stringify(data));
+            console.log('in foreground: ' + JSON.stringify(data));
         }
     }
 
     public setAppNotification() {
-        try {
-            //platform.resume.subscribe(() => {
-            // this.firebase.onNotificationOpen()
-            //});
-            this.firebase.onNotificationOpen().subscribe(this.onNotificationOpen);
-            this.grantNotificationPermission();
-            this.firebaseOnTokenRefresh();
-        } catch (error) {
-            console.log('Cure Temprature error: ' + error);
-        }
+        this.firebaseGetToken();
+        this.listenToNotifications();
     }
 }

@@ -16,7 +16,7 @@ export class LoginPage {
 
     public account: LoginData;
     // Our translated text strings
-    private loginErrorString: string;
+    //private loginErrorString: string;
 
     constructor(
         public navCtrl: NavController,
@@ -27,11 +27,11 @@ export class LoginPage {
         this.account = {
             clientId: APIConstants.CLIENT_ID,
             clientSecret: APIConstants.CLIENT_SECRET,
-            password: "123456789",
-            username: "mohammedzaki.dev@gmail.com"
+            password: "123456",
+            username: "ios@test.com"
         };
         this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-            this.loginErrorString = value;
+            //this.loginErrorString = value;
         });
     }
 
