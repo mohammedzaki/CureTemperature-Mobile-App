@@ -9,6 +9,7 @@ import { LoginPageModule } from "./login/login.module";
 import { TabsControllerPageModule } from "./tabs-controller/tabs-controller.module";
 import { NotificationModalModule } from "./notification-modal/notification-modal.module";
 import { SelectDevicePageModule } from "./select-device/select-device.module";
+import { SettingsPageModule } from './settings/settings.module';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { SelectDevicePageModule } from "./select-device/select-device.module";
         LoginPageModule,
         TabsControllerPageModule,
         NotificationModalModule,
-        SelectDevicePageModule
+        SelectDevicePageModule,
+        SettingsPageModule
     ]
 })
 export class PagesModule { }
