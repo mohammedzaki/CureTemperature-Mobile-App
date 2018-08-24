@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { Config, Nav, Platform } from 'ionic-angular';
+import { Config, Nav, Platform, Events } from 'ionic-angular';
 
 import { FirstRunPage, MainPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
@@ -12,53 +12,57 @@ import { UserAPIService } from "../providers/api";
     templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage = FirstRunPage;
-
+    
     @ViewChild(Nav) nav: Nav;
 
     constructor(
         private translate: TranslateService,
-        platform: Platform, settings: Settings,
-        private config: Config, 
-        private statusBar: StatusBar, 
+        private platform: Platform,
+        private settings: Settings,
+        private config: Config,
+        private statusBar: StatusBar,
         private splashScreen: SplashScreen,
-        private loginApi: UserAPIService) {
-        
-        this.rootPage = this.loginApi.isAuthenticated() ? MainPage : FirstRunPage;
-        
-        platform.ready().then(() => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
+        private loginApi: UserAPIService,
+        private events: Events) {
+
+        this.startApp();
+
+        this.events.subscribe('language:changed', pageIndex => {
+            this.restartApp(MainPage, { pageIndex: pageIndex });
         });
-        this.initTranslate();
+        this.events.subscribe('user:logout', componentPage => {
+            this.restartApp(componentPage);
+        });
     }
 
     initTranslate() {
-        // Set the default language for translation strings, and the current language.
-        this.translate.setDefaultLang('en');
-        const browserLang = this.translate.getBrowserLang();
-
-        if (browserLang) {
-            if (browserLang === 'zh') {
-                const browserCultureLang = this.translate.getBrowserCultureLang();
-
-                if (browserCultureLang.match(/-CN|CHS|Hans/i)) {
-                    this.translate.use('zh-cmn-Hans');
-                } else if (browserCultureLang.match(/-TW|CHT|Hant/i)) {
-                    this.translate.use('zh-cmn-Hant');
-                }
-            } else {
-                this.translate.use(this.translate.getBrowserLang());
-            }
+        let lang = this.settings.allSettings.lang;
+        this.translate.setDefaultLang(lang);
+        this.translate.use(lang);
+        if (lang == 'ar') {
+            this.platform.setDir('rtl', true);
         } else {
-            this.translate.use('en'); // Set your language here
+            this.platform.setDir('ltr', true);
         }
-
         this.translate.get([ 'BACK_BUTTON_TEXT' ]).subscribe(values => {
             this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
         });
     }
 
+    startApp(mainPage = MainPage, params = {}) {
+        this.settings.load().then(() => {
+            this.initTranslate();
+            this.nav.setRoot(this.loginApi.isAuthenticated() ? mainPage : FirstRunPage, params);
+            this.platform.ready().then(() => {
+                // Okay, so the platform is ready and our plugins are available.
+                // Here you can do any higher level native things you might need.
+                this.statusBar.styleDefault();
+                this.splashScreen.hide();
+            });
+        });
+    }
+
+    restartApp(componentPage = MainPage, params = {}) {
+        this.startApp(componentPage, params);
+    }
 }
