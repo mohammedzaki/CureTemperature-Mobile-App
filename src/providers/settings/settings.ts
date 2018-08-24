@@ -9,7 +9,7 @@ import { SettingsModel } from './settings.model';
 export class Settings {
   private SETTINGS_KEY: string = '_settings';
 
-  settings: any;
+  settings: SettingsModel;
 
   _defaults: SettingsModel;
   _readyPromise: Promise<any>;

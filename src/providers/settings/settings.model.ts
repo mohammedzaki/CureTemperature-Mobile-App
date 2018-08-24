@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
+export interface UserPerferedDevicesI {
+    uL: number;
+    uR: number;
+    dL: number;
+    dR: number;
+}
 
 export interface SettingsModel {
     lang: string;
-    userPerferedDevices: {
-        uL: number;
-        uR: number;
-        dL: number;
-        dR: number;
-    };
+    userPerferedDevices: UserPerferedDevicesI;
 }

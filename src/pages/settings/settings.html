@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            {{ 'Settings' | translate }}
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="has-background">
+
+    <form [formGroup]="form" *ngIf="settingsReady">
+        <ion-list>
+            <ion-item>
+                <ion-label>{{ 'Select Language' | translate }}</ion-label>
+                <ion-select formControlName="lang">
+                    <ion-option value="en" checked="true">English</ion-option>
+                    <ion-option value="ar">العربية</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </form>
+
+</ion-content>

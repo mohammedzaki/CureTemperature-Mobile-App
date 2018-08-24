@@ -3,9 +3,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform, Events } from 'ionic-angular';
-
 import { FirstRunPage, MainPage } from '../pages/pages';
-import { Settings } from '../providers/providers';
+import { Settings } from '../providers';
 import { UserAPIService } from "../providers/api";
 
 @Component({
