@@ -35,18 +35,6 @@ export class LoginPage {
         });
     }
 
-    ngOnInit() {
-        var storage = window.localStorage;
-        var userPerferedDevices = storage.getItem(AppConstants.USER_PREFERED_DEVICES);
-        userPerferedDevices = JSON.stringify({
-            uL: -1,
-            uR: -1,
-            dL: -1,
-            dR: -1
-        });
-        storage.setItem(AppConstants.USER_PREFERED_DEVICES, userPerferedDevices);
-    }
-
     // Attempt to login in through our User service
     doLogin() {
         let loading = this.loadingCtrl.create({
