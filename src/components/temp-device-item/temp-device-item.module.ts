@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GaugeModule } from "../gauge";
 import { TempDeviceItemComponent } from "./temp-device-item";
 import { IonicModule } from "ionic-angular";
+import { DeviceGaugeModule } from '../shared/device-gauge';
 
 @NgModule({
     declarations: [
@@ -10,8 +10,8 @@ import { IonicModule } from "ionic-angular";
     ],
     imports: [
         CommonModule,
-        GaugeModule,
-        IonicModule
+        IonicModule,
+        DeviceGaugeModule
     ],
     exports: [
         TempDeviceItemComponent

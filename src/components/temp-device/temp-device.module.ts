@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { TempDeviceComponent } from "./temp-device";
 import { CommonModule } from '@angular/common';
-import { GaugeModule } from "../gauge";
+import { DeviceGaugeModule } from '../shared/device-gauge';
+import { TempDeviceComponent } from "./temp-device";
 
 @NgModule({
     declarations: [
@@ -9,7 +9,7 @@ import { GaugeModule } from "../gauge";
     ],
     imports: [
         CommonModule,
-        GaugeModule
+        DeviceGaugeModule
     ],
     exports: [
         TempDeviceComponent
