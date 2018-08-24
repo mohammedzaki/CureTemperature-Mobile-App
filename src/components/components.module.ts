@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { GaugeModule } from "./gauge";
-import { TempDeviceModule } from "./temp-device";
+import { TempDeviceHomeModule } from "./temp-device-home";
 import { TempDeviceItemModule } from "./temp-device-item";
 import { DeviceGaugeModule } from './shared/device-gauge';
 
@@ -8,7 +8,7 @@ import { DeviceGaugeModule } from './shared/device-gauge';
     imports: [
         GaugeModule,
         DeviceGaugeModule,
-        TempDeviceModule,
+        TempDeviceHomeModule,
         TempDeviceItemModule
     ],
     entryComponents: [

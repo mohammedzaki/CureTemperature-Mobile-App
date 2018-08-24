@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DeviceGaugeModule } from '../shared/device-gauge';
-import { TempDeviceComponent } from "./temp-device";
+import { TempDeviceHomeComponent } from "./temp-device-home";
 
 @NgModule({
     declarations: [
-        TempDeviceComponent
+        TempDeviceHomeComponent
     ],
     imports: [
         CommonModule,
         DeviceGaugeModule
     ],
     exports: [
-        TempDeviceComponent
+        TempDeviceHomeComponent
     ]
 })
-export class TempDeviceModule { }
+export class TempDeviceHomeModule { }

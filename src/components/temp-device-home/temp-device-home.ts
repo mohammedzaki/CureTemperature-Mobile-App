@@ -8,10 +8,10 @@ import { Device } from "../../models";
  * Components.
  */
 @Component({
-    selector: 'temp-device',
-    templateUrl: 'temp-device.html'
+    selector: 'temp-device-home',
+    templateUrl: 'temp-device-home.html'
 })
-export class TempDeviceComponent {
+export class TempDeviceHomeComponent {
 
     @Input() device: Device = {};
     
