@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
-
 import { HomePage } from './home';
-//import { GaugeModule } from "../../components/gauge";
-import { TempDeviceModule } from "../../components/temp-device";
+import { TempDeviceHomeModule } from "../../components/temp-device-home";
 
 @NgModule({
     declarations: [
@@ -13,8 +11,7 @@ import { TempDeviceModule } from "../../components/temp-device";
     imports: [
         IonicPageModule.forChild(HomePage),
         TranslateModule.forChild(),
-        //GaugeModule,
-        TempDeviceModule
+        TempDeviceHomeModule
     ],
     entryComponents: [
         HomePage

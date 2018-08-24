@@ -16,7 +16,7 @@ export class LoginPage {
 
     public account: LoginData;
     // Our translated text strings
-    //private loginErrorString: string;
+    private loginErrorString: string;
 
     constructor(
         public navCtrl: NavController,
@@ -31,7 +31,7 @@ export class LoginPage {
             username: "ios@test.com"
         };
         this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-            //this.loginErrorString = value;
+            this.loginErrorString = value;
         });
     }
 
@@ -67,7 +67,7 @@ export class LoginPage {
         }, err => {
             loading.dismiss();
             let toast = this.toastCtrl.create({
-                message: err,
+                message: this.loginErrorString,
                 duration: 6000
             });
             console.log(err);

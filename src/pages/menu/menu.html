@@ -1,4 +1,4 @@
-<ion-menu [content]="content"  >
+<ion-menu [content]="content">
     <ion-content class="menu-content" id="page-menu">
         <div class="menu-items">
             <div class="menu-header">
@@ -9,7 +9,7 @@
             </div>
             <ion-list class="listStyle">
                 <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="menu-item">
-                    <ion-note  [color]="isActive(p)" class="menu-title">{{p.title}}</ion-note>
+                    <ion-note  [color]="isActive(p)" class="menu-title">{{ p.title | translate }}</ion-note>
                     <ion-icon [color]="isActive(p)" name="ios-arrow-forward" item-end class="forward-icon "></ion-icon>
                 </ion-item>
             </ion-list>

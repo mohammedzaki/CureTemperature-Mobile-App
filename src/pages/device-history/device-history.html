@@ -4,7 +4,7 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>
-            Device History
+            {{ 'Device History' | translate }}
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -63,8 +63,11 @@
 
         <ion-list *ngSwitchCase="'week'">
             <ion-item>
-                <ion-label>Select week</ion-label>
+                <ion-label>Select Month</ion-label>
                 <ion-datetime displayFormat="MMMM YYYY" [(ngModel)]="selectedMonthWeek"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>Select week</ion-label>
                 <ion-select [(ngModel)]="selectedWeek">
                     <ion-option value='0'>1st</ion-option>
                     <ion-option value='1'>2nd</ion-option>

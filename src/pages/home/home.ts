@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, LoadingController, ToastController } from 'ionic-angular';
 import { NotificationModal, DevicesPage } from "../pages";
-import { AppNotification, AppConstants } from "../../providers/index";
+import { AppNotification, AppConstants, Settings } from "../../providers";
 import { Device, Account } from "../../models";
 import { UserDevicesService } from "../../providers/api";
+import { UserPerferedDevicesI } from '../../providers/settings/settings.model';
 
 @IonicPage()
 @Component({
@@ -20,26 +21,29 @@ export class HomePage {
         name: 'Cure Group',
         place: 'Sheraton'
     };
-    userPerferedDevices;
-    
+    userPerferedDevices: UserPerferedDevicesI;
+
     constructor(
-        public navCtrl: NavController,
+        private navCtrl: NavController,
         private modalCtrl: ModalController,
         private appNotification: AppNotification,
         private userDevicesService: UserDevicesService,
-        public toastCtrl: ToastController,
-        public loadingCtrl: LoadingController) {
+        private toastCtrl: ToastController,
+        private loadingCtrl: LoadingController,
+        private settings: Settings) {
+
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad HomePage');
         this.appNotification.setAppNotification();
-        this.setDevices();
+        this.settings.load().then(() => {
+            this.userPerferedDevices = this.settings.allSettings.userPerferedDevices;
+            this.setDevices();
+        });
     }
 
     getPerD() {
-        var storage = window.localStorage;
-        this.userPerferedDevices = JSON.parse(storage.getItem(AppConstants.USER_PREFERED_DEVICES));
         return [ this.userPerferedDevices.uL, this.userPerferedDevices.uR, this.userPerferedDevices.dL, this.userPerferedDevices.dR ];
     }
 
@@ -53,19 +57,19 @@ export class HomePage {
         this.userDevicesService.getUserDevices(userId, this.getPerD()).subscribe(res => {
             if (res.success) {
                 if (res.data.account !== null) {
-                    this.account = res.data.account; 
+                    this.account = res.data.account;
                 }
                 res.data.devices.forEach((device) => {
                     switch (device.id) {
-                        case this.userPerferedDevices.uL: 
+                        case this.userPerferedDevices.uL:
                             this.deviceUL = device;
                             this.deviceUL.shouldShow = true;
                             break;
-                        case this.userPerferedDevices.uR: 
+                        case this.userPerferedDevices.uR:
                             this.deviceUR = device;
                             this.deviceUR.shouldShow = true;
                             break;
-                        case this.userPerferedDevices.dL: 
+                        case this.userPerferedDevices.dL:
                             this.deviceDL = device;
                             this.deviceDL.shouldShow = true;
                             break;
