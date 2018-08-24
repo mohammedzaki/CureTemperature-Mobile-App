@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Platform, ToastController, AlertController } from "ionic-angular";
+import { Platform, ToastController } from "ionic-angular";
 import { Firebase } from "@ionic-native/firebase";
 import { UserAPIService } from "../api";
 import { AppConstants } from "../index";
@@ -14,8 +14,7 @@ export class AppNotification {
         private platform: Platform,
         private toastCtrl: ToastController,
         private firebaseNative: Firebase,
-        private userProfileApi: UserAPIService,
-        private alertCtrl: AlertController) {
+        private userProfileApi: UserAPIService) {
         this.userId = +window.localStorage.getItem(AppConstants.USER_ID);
         this.userProfileApi.configuration.accessToken = window.localStorage.getItem(AppConstants.API_ACCESS_TOKEN);
         console.log('accessToken from UserAPIService: ' + this.userProfileApi.configuration.accessToken);
@@ -31,16 +30,7 @@ export class AppNotification {
 
         if (this.platform.is('ios')) {
             deviceToken = await this.firebaseNative.getToken();
-            await this.firebaseNative.grantPermission().then(granted => {
-                if (!granted) {
-                    this.alertCtrl.create({
-                        title: "Permission",
-                        message: "You wouldn't be able to receive any notifications."
-                    });
-                }
-            }).catch(error => {
-                this.toastCtrl.create({ message: error });
-            });
+            await this.firebaseNative.grantPermission();
         }
         return this.saveDeviceTokenToDatabase(deviceToken);
     }
@@ -91,7 +81,11 @@ export class AppNotification {
     }
 
     public setAppNotification() {
-        this.firebaseGetToken();
-        this.listenToNotifications();
+        try {
+            this.firebaseGetToken();
+            this.listenToNotifications();
+        } catch (e) {
+            console.log('error in setAppNotification: ' + JSON.stringify(e));
+        }
     }
 }

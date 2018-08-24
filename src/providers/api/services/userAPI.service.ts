@@ -200,7 +200,7 @@ export class UserAPIService {
     
     public isAuthenticated(): boolean {
         console.log("Auth: " + localStorage.getItem(AppConstants.USER_ID));
-        if (localStorage.getItem(AppConstants.USER_ID) !== null) {
+        if (localStorage.getItem(AppConstants.USER_ID) !== null && localStorage.getItem(AppConstants.USER_ID) !== '-1') {
             return true;
         }
         return false;
