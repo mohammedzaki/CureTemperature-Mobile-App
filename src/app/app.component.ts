@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform, Events } from 'ionic-angular';
 import { FirstRunPage, MainPage } from '../pages/pages';
-import { Settings } from '../providers';
+import { Settings, AppConstants } from '../providers';
 import { UserAPIService } from "../providers/api";
 
 @Component({
@@ -26,10 +26,10 @@ export class MyApp {
 
         this.startApp();
 
-        this.events.subscribe('language:changed', pageIndex => {
-            this.restartApp(MainPage, { pageIndex: pageIndex });
+        this.events.subscribe(AppConstants.EVENTS.LANGUAGE_CHANGED, pageName => {
+            this.restartApp(MainPage, { pageName: pageName });
         });
-        this.events.subscribe('user:logout', componentPage => {
+        this.events.subscribe(AppConstants.EVENTS.USER_LOGOUT, componentPage => {
             this.restartApp(componentPage);
         });
     }

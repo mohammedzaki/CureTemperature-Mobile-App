@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
-import { Settings } from '../../providers';
+import { Settings, AppConstants } from '../../providers';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -57,7 +57,7 @@ export class SettingsPage {
         if (this.settings.allSettings.lang != lang) {
             this.settings.merge(this.form.value);
             setTimeout(() => {
-                this.events.publish('language:changed', 7); 
+                this.events.publish(AppConstants.EVENTS.LANGUAGE_CHANGED, this.navCtrl.getActive().name); 
             }, 100);
         } else {
             this.settings.merge(this.form.value);

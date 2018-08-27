@@ -34,15 +34,15 @@ export class MenuPage {
             { title: 'HOME', pageName: 'HomePage', component: HomePage, index: 0, icon: 'ios-home' },
             { title: 'DEVICES', pageName: 'DevicesPage', component: DevicesPage, index: 1, icon: 'ios-cart' },
             { title: 'DEVICE HISTORY', pageName: 'DeviceHistoryPage', component: DeviceHistoryPage, index: 2, icon: 'contacts' },
-            //{ title: 'NOTIFICATIONS', pageName: 'NotificationModal', component: NotificationModal, index: 4, icon: 'information-circle' },
-            { title: 'ABOUT US', pageName: 'AboutPage', component: AboutPage, index: 3, icon: 'information-circle' },
-            { title: 'SETTINGS', pageName: 'SettingsPage', component: SettingsPage, index: 7, icon: 'information-circle' },
-            { title: 'LOGOUT', pageName: 'LoginPage', component: LoginPage, index: 5, icon: 'information-circle' }
+            //{ title: 'NOTIFICATIONS', pageName: 'NotificationModal', component: NotificationModal, index: 3, icon: 'information-circle' },
+            { title: 'ABOUT US', pageName: 'AboutPage', component: AboutPage, index: 4, icon: 'information-circle' },
+            { title: 'SETTINGS', pageName: 'SettingsPage', component: SettingsPage, index: 5, icon: 'information-circle' },
+            { title: 'LOGOUT', pageName: 'LoginPage', component: LoginPage, index: 6, icon: 'information-circle' }
         ];
-        console.log('pageIndex: ' + this.navParams.get('pageIndex'));
-        if (this.navParams.get('pageIndex') !== null && this.navParams.get('pageIndex') !== undefined) {
+        console.log('pageName: ' + this.navParams.get('pageName'));
+        if (this.navParams.get('pageName') !== null && this.navParams.get('pageName') !== undefined) {
             this.rootPage = this.getPage({
-                index: navParams.get('pageIndex')
+                pageName: navParams.get('pageName')
             }).component;
         }
     }
@@ -53,14 +53,14 @@ export class MenuPage {
         if (page.index) {
             params = { tabIndex: page.index };
         }
-        switch (page.index) {
-            case 4:
+        switch (page.pageName) {
+            case 'NotificationModal':
                 let modal = this.modalCtrl.create(NotificationModal);
                 modal.present();
                 break;
-            case 5:
+            case 'LoginPage':
                 window.localStorage.setItem(AppConstants.USER_ID, '-1');
-                this.events.publish('user:logout', page.component);
+                this.events.publish(AppConstants.EVENTS.USER_LOGOUT, page.component);
                 break;
             default:
                 this.nav.setRoot(page.component, params);
