@@ -11,5 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
         IonicPageModule.forChild(DeviceHistoryPage),
         TranslateModule.forChild()
     ],
+    exports: [
+        DeviceHistoryPage
+    ]
 })
 export class DeviceHistoryPageModule { }

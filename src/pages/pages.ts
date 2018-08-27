@@ -5,13 +5,10 @@ export const FirstRunPage = 'LoginPage';
 // Change this if not using tabs
 export const MainPage = 'MenuPage';
 
-export * from './devices/devices';
-export * from './home/home';
-export * from './device-history/device-history';
-export * from './devices/devices';
-export * from './about/about';
-export * from './login/login';
-export * from './loading/loading';
-export * from './notification-modal/notification-modal';
-export * from './menu/menu';
-export * from './settings/settings';
+export const HomePage = 'HomePage';
+export const DevicesPage = 'DevicesPage';
+export const DeviceHistoryPage = 'DeviceHistoryPage';
+export const AboutPage = 'AboutPage';
+export const LoginPage = 'LoginPage';
+export const NotificationModal = 'NotificationModal';
+export const SettingsPage = 'SettingsPage';

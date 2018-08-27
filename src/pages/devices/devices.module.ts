@@ -13,5 +13,8 @@ import { TranslateModule } from '@ngx-translate/core';
         TempDeviceItemModule,
         TranslateModule.forChild()
     ],
+    exports: [
+        DevicesPage
+    ]
 })
 export class DevicesPageModule { }

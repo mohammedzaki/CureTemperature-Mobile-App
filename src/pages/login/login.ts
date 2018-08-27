@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, ToastController, NavController, LoadingController } from 'ionic-angular';
-
 import { MainPage } from '../pages';
 import { UserAPIService, APIConstants } from "../../providers/api";
 import { LoginData } from "../../models";

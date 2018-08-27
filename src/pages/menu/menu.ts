@@ -2,14 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, Nav, ModalController, Events, NavParams } from 'ionic-angular';
 import { HomePage, DevicesPage, DeviceHistoryPage, AboutPage, LoginPage, NotificationModal, SettingsPage } from "../pages";
 import { AppConstants } from "../../providers";
-import { TranslateService } from '@ngx-translate/core';
 
 export interface PageInterface {
     title: string;
     pageName?: string;
-    component?: any;
-    index?: number;
-    icon?: string;
 }
 
 @IonicPage()
@@ -21,49 +17,45 @@ export class MenuPage {
     // A reference to the ion-nav in our component
     @ViewChild(Nav) nav: Nav;
 
-    rootPage: any = HomePage;
+    rootPage: any = 'HomePage';
 
     pages: PageInterface[];
 
     constructor(
         private modalCtrl: ModalController,
-        private translate: TranslateService,
         private events: Events,
         private navParams: NavParams) {
         this.pages = [
-            { title: 'HOME', pageName: 'HomePage', component: HomePage, index: 0, icon: 'ios-home' },
-            { title: 'DEVICES', pageName: 'DevicesPage', component: DevicesPage, index: 1, icon: 'ios-cart' },
-            { title: 'DEVICE HISTORY', pageName: 'DeviceHistoryPage', component: DeviceHistoryPage, index: 2, icon: 'contacts' },
-            //{ title: 'NOTIFICATIONS', pageName: 'NotificationModal', component: NotificationModal, index: 3, icon: 'information-circle' },
-            { title: 'ABOUT US', pageName: 'AboutPage', component: AboutPage, index: 4, icon: 'information-circle' },
-            { title: 'SETTINGS', pageName: 'SettingsPage', component: SettingsPage, index: 5, icon: 'information-circle' },
-            { title: 'LOGOUT', pageName: 'LoginPage', component: LoginPage, index: 6, icon: 'information-circle' }
+            { title: 'Home', pageName: HomePage },
+            { title: 'Devices', pageName: DevicesPage },
+            { title: 'Device History', pageName: DeviceHistoryPage },
+            //{ title: 'NOTIFICATIONS', pageName: NotificationModal },
+            { title: 'About Us', pageName: AboutPage },
+            { title: 'Settings', pageName: SettingsPage },
+            { title: 'Logout', pageName: LoginPage }
         ];
         console.log('pageName: ' + this.navParams.get('pageName'));
         if (this.navParams.get('pageName') !== null && this.navParams.get('pageName') !== undefined) {
             this.rootPage = this.getPage({
                 pageName: navParams.get('pageName')
-            }).component;
+            }).pageName;
         }
     }
 
     openPage(page: PageInterface) {
         let params = {};
 
-        if (page.index) {
-            params = { tabIndex: page.index };
-        }
         switch (page.pageName) {
-            case 'NotificationModal':
+            case NotificationModal:
                 let modal = this.modalCtrl.create(NotificationModal);
                 modal.present();
                 break;
-            case 'LoginPage':
+            case LoginPage:
                 window.localStorage.setItem(AppConstants.USER_ID, '-1');
-                this.events.publish(AppConstants.EVENTS.USER_LOGOUT, page.component);
+                this.events.publish(AppConstants.EVENTS.USER_LOGOUT, page.pageName);
                 break;
             default:
-                this.nav.setRoot(page.component, params);
+                this.nav.setRoot(page.pageName, params);
                 break;
         }
     }

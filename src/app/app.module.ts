@@ -8,10 +8,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
 import { MyApp } from './app.component';
-import { PagesModule } from "../pages/pages.module";
-import { ComponentsModule } from "../components/components.module";
 import { ProvidersModule } from "../providers/providers.module";
 import { Firebase } from "@ionic-native/firebase";
 
@@ -29,7 +26,6 @@ export function createTranslateLoader(http: HttpClient) {
         BrowserModule,
         HttpClientModule,
         ProvidersModule,
-
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -38,9 +34,7 @@ export function createTranslateLoader(http: HttpClient) {
             }
         }),
         IonicModule.forRoot(MyApp),
-        IonicStorageModule.forRoot(),
-        PagesModule,
-        ComponentsModule
+        IonicStorageModule.forRoot()
     ],
     bootstrap: [ IonicApp ],
     entryComponents: [
