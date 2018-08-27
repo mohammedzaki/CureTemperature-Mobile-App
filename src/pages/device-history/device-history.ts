@@ -4,7 +4,7 @@ import { Chart } from 'chart.js';
 import { Device, Account } from "../../models";
 import * as moment from 'moment';
 import { DeviceService } from "../../providers/api";
-import { SelectDevicePage } from "../select-device/select-device";
+import { SelectDevicePage } from "../pages";
 
 @IonicPage()
 @Component({

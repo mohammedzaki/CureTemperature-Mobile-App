@@ -13,9 +13,6 @@ import { TempDeviceHomeModule } from "../../components/temp-device-home";
         TranslateModule.forChild(),
         TempDeviceHomeModule
     ],
-    entryComponents: [
-        HomePage
-    ],
     exports: [
         HomePage
     ]

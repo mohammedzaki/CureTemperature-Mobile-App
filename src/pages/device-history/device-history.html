@@ -14,16 +14,16 @@
     <div class="rangselector-container">
         <ion-segment [(ngModel)]="rangselector">
             <ion-segment-button value="day" (ionSelect)="setSelected('day')">
-                Day
+                {{ 'Day' | translate }}
             </ion-segment-button>
             <ion-segment-button value="week" (ionSelect)="setSelected('week')">
-                Week
+                {{ 'Week' | translate }}
             </ion-segment-button>
             <ion-segment-button value="month" (ionSelect)="setSelected('month')">
-                Month
+                {{ 'Month' | translate }}
             </ion-segment-button>
             <ion-segment-button value="rang" (ionSelect)="setSelected('rang')">
-                Rang
+                {{ 'Range' | translate }}
             </ion-segment-button>
         </ion-segment>
     </div>
@@ -33,21 +33,21 @@
                 <ion-col col-8>
                     <div class="device-detials">
                         <div class="hospital">
-                            Org: {{ account.name }}
+                            {{ 'Organization' | translate }}: {{ account.name }}
                         </div>
                         <div class="place">
-                            Location: {{ account.place }}
+                            {{ 'Location' | translate }}: {{ account.place }}
                         </div>
                         <div class="name">
-                            Device: {{ device.name }}
+                            {{ 'Device' | translate }}: {{ device.name }}
                         </div>
                         <div class="description">
-                            Desc: {{ device.description }}
+                            {{ 'Category' | translate }}: {{ device.description }}
                         </div>
                     </div>
                 </ion-col>
                 <ion-col col-4>
-                    <button ion-button color="assertive" block class="btn-change" (click)="openSelectDeviceModal()">CHOOSE<br/>DEVICE</button>
+                    <button ion-button color="assertive" block class="btn-change" (click)="openSelectDeviceModal()" text-wrap>{{ 'Choose Device' | translate }}</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -56,48 +56,48 @@
 
         <ion-list *ngSwitchCase="'day'">
             <ion-item>
-                <ion-label>Select Day</ion-label>
+                <ion-label>{{ 'Select Day' | translate }}</ion-label>
                 <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="selectedDayDate"></ion-datetime>
             </ion-item>
         </ion-list>
 
         <ion-list *ngSwitchCase="'week'">
             <ion-item>
-                <ion-label>Select Month</ion-label>
+                <ion-label>{{ 'Select Month' | translate }}</ion-label>
                 <ion-datetime displayFormat="MMMM YYYY" [(ngModel)]="selectedMonthWeek"></ion-datetime>
             </ion-item>
             <ion-item>
-                <ion-label>Select week</ion-label>
+                <ion-label>{{ 'Select week' | translate }}</ion-label>
                 <ion-select [(ngModel)]="selectedWeek">
-                    <ion-option value='0'>1st</ion-option>
-                    <ion-option value='1'>2nd</ion-option>
-                    <ion-option value='2'>3tr</ion-option>
-                    <ion-option value='3'>4th</ion-option>
-                    <ion-option value='4'>5th</ion-option>
+                    <ion-option value='0'>{{ 'First week' | translate }}</ion-option>
+                    <ion-option value='1'>{{ 'Second week' | translate }}</ion-option>
+                    <ion-option value='2'>{{ 'Third week' | translate }}</ion-option>
+                    <ion-option value='3'>{{ 'Fourth week' | translate }}</ion-option>
+                    <ion-option value='4'>{{ 'Fifth week' | translate }}</ion-option>
                 </ion-select>
             </ion-item>
         </ion-list>
 
         <ion-list *ngSwitchCase="'month'">
             <ion-item>
-                <ion-label>Select Month</ion-label>
+                <ion-label>{{ 'Select Month' | translate }}</ion-label>
                 <ion-datetime displayFormat="MMMM YYYY" [(ngModel)]="selectedMonth"></ion-datetime>
             </ion-item>
         </ion-list>
 
         <ion-list *ngSwitchCase="'rang'">
             <ion-item>
-                <ion-label>Start Date</ion-label>
+                <ion-label>{{ 'Start Date' | translate }}</ion-label>
                 <ion-datetime displayFormat="MM DD YYYY h:mm A" [(ngModel)]="selectedStartDate"></ion-datetime>
             </ion-item>
             <ion-item>
-                <ion-label>End Date</ion-label>
+                <ion-label>{{ 'End Date' | translate }}</ion-label>
                 <ion-datetime displayFormat="MM DD YYYY h:mm A" [(ngModel)]="selectedEndDate"></ion-datetime>
             </ion-item>
         </ion-list>
         
         <ion-col col-4 class="btn-submit-col">
-            <button ion-button color="assertive" block (click)="getDeviceHistory()" >SUBMIT</button>
+            <button ion-button color="assertive" block (click)="getDeviceHistory()" >{{ 'Submit' | translate }}</button>
         </ion-col>
     </div>
 
