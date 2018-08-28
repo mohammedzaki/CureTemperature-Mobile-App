@@ -18,6 +18,7 @@
     "SIGNUP_BUTTON": "انشاء الحساب",
 
     "DONE_BUTTON": "انهاء",
+    "OK_BUTTON": "موافق",
     "CANCEL_BUTTON": "الغاء",
     "DELETE_BUTTON": "حذف",
 
@@ -54,6 +55,14 @@
     "End Date": "تاريخ النهاية",
     "Submit": "عرض",
     "Select Device": "إختر الجهاز",
+    "Select Devices": "إختر الاجهزة",
     "Type Device Name": "أكتب اسم الجهاز",
-    "Select": "إختر"
+    "Select": "إختر",
+    "Location Details": "تفاصيل المكان",
+    "Select Home Position": "إختر الموضع", 
+    "Upper Left": "أعلى الشمال",
+    "Upper Right": "أعلى اليمين",
+    "Down Left": "أسفل الشمال",
+    "Down Right": "أسفل اليمن",
+    "Add To Home": "أضف للشاشة الرئيسة"
 }

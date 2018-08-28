@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TempDeviceItemComponent } from "./temp-device-item";
 import { IonicModule } from "ionic-angular";
 import { DeviceGaugeModule } from '../shared/device-gauge';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -11,7 +12,8 @@ import { DeviceGaugeModule } from '../shared/device-gauge';
     imports: [
         CommonModule,
         IonicModule,
-        DeviceGaugeModule
+        DeviceGaugeModule,
+        TranslateModule.forChild(),
     ],
     exports: [
         TempDeviceItemComponent

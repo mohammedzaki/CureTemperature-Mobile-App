@@ -15,7 +15,7 @@
         <ion-list>
             <ion-item>
                 <ion-label>{{ 'Select Language' | translate }}</ion-label>
-                <ion-select formControlName="lang">
+                <ion-select formControlName="lang" [okText]="'OK_BUTTON' | translate" [cancelText]="'CANCEL_BUTTON' | translate">
                     <ion-option value="en" checked="true">English</ion-option>
                     <ion-option value="ar">العربية</ion-option>
                 </ion-select>

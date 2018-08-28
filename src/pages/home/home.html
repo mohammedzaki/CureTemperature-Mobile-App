@@ -19,7 +19,7 @@
 <ion-content padding class="has-background">
     <ion-card>
         <ion-card-header>
-            Location Details
+            {{ 'Location Details' | translate }}
         </ion-card-header>
         <ion-card-content>
             {{ 'Organization' | translate }}: {{ account.name }} <br>
@@ -46,6 +46,6 @@
 
 <ion-footer no-shadow>
     <div class="btn-div">
-        <button ion-button color="assertive" block class="btnLogin" (click)="openSelectDevices()">Select Devices</button>
+        <button ion-button color="assertive" block class="btnLogin" (click)="openSelectDevices()">{{ 'Select Devices' | translate }}</button>
     </div>
 </ion-footer>

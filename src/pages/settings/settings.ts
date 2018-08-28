@@ -17,26 +17,14 @@ import { Settings, AppConstants } from '../../providers';
 export class SettingsPage {
     // Our local settings object
     options: any;
-
     settingsReady = false;
-
     form: FormGroup;
-
-    profileSettings = {
-        page: 'profile',
-        pageTitleKey: 'SETTINGS_PAGE_PROFILE'
-    };
-
-    page: string = 'main';
-    pageTitleKey: string = 'SETTINGS_TITLE';
-    pageTitle: string;
-
 
     constructor(public navCtrl: NavController,
         public settings: Settings,
         public formBuilder: FormBuilder,
         public navParams: NavParams,
-        public translate: TranslateService,
+        public translateService: TranslateService,
         private events: Events) {
     }
 
@@ -44,7 +32,7 @@ export class SettingsPage {
         let group: any = {
             lang: [ this.options.lang ]
         };
-        
+
         this.form = this.formBuilder.group(group);
 
         // Watch the form for changes, and
@@ -57,7 +45,7 @@ export class SettingsPage {
         if (this.settings.allSettings.lang != lang) {
             this.settings.merge(this.form.value);
             setTimeout(() => {
-                this.events.publish(AppConstants.EVENTS.LANGUAGE_CHANGED, this.navCtrl.getActive().name); 
+                this.events.publish(AppConstants.EVENTS.LANGUAGE_CHANGED, this.navCtrl.getActive().name);
             }, 100);
         } else {
             this.settings.merge(this.form.value);
@@ -72,13 +60,6 @@ export class SettingsPage {
     ionViewWillEnter() {
         // Build an empty form for the template to render
         this.form = this.formBuilder.group({});
-
-        //this.page = this.navParams.get('page') || this.page;
-        //this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
-
-        this.translate.get(this.pageTitleKey).subscribe((res) => {
-            this.pageTitle = res;
-        })
 
         this.settings.load().then(() => {
             this.settingsReady = true;
