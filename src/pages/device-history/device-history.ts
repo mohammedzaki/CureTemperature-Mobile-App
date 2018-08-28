@@ -137,7 +137,7 @@ export class DeviceHistoryPage {
         // Getting data from the modal:
         modal.onDidDismiss(selectedDevice => {
             this.device = selectedDevice;
-            this.account = selectedDevice.account;
+            this.account = this.device.account;
         });
         modal.present();
     }
