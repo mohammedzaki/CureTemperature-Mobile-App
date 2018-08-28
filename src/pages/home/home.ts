@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, LoadingController, ToastController } from 'ionic-angular';
 import { NotificationModal, DevicesPage } from "../pages";
-import { AppNotification, AppConstants, Settings } from "../../providers";
+import { AppNotification, AppConstants, Settings, LoadingControllerProvider } from "../../providers";
 import { Device, Account } from "../../models";
 import { UserDevicesService } from "../../providers/api";
 import { UserPerferedDevicesI } from '../../providers/settings/settings.model';
@@ -29,7 +29,7 @@ export class HomePage {
         private appNotification: AppNotification,
         private userDevicesService: UserDevicesService,
         private toastCtrl: ToastController,
-        private loadingCtrl: LoadingController,
+        private loadingCtrl: LoadingControllerProvider,
         private settings: Settings) {
 
     }
@@ -48,10 +48,7 @@ export class HomePage {
     }
 
     setDevices() {
-        let loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        loading.present();
+        this.loadingCtrl.showLoading();
         var storage = window.localStorage;
         let userId = storage.getItem(AppConstants.USER_ID);
         this.userDevicesService.getUserDevices(userId, this.getPerD()).subscribe(res => {
@@ -81,10 +78,10 @@ export class HomePage {
                             break;
                     }
                 });
-                loading.dismiss();
+                this.loadingCtrl.hideLoading();
             }
         }, err => {
-            loading.dismiss();
+            this.loadingCtrl.hideLoading();
             let toast = this.toastCtrl.create({
                 message: err,
                 duration: 6000

@@ -38,7 +38,7 @@
     "Day": "يومى", 
     "Week": "اسبوعى",
     "Month": "شهرى",
-    "Range": "مده",
+    "Range": "فترة زمنية",
     "Device": "الجهاز",
     "Category": "الفئة",
     "Choose Device": "إختر الجهاز",
@@ -64,5 +64,6 @@
     "Upper Right": "أعلى اليمين",
     "Down Left": "أسفل الشمال",
     "Down Right": "أسفل اليمن",
-    "Add To Home": "أضف للشاشة الرئيسة"
+    "Add To Home": "أضف للشاشة الرئيسة",
+    "Please wait": "جاري التحميل ..."
 }

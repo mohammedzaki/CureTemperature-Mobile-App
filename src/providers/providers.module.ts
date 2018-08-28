@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Settings, APIModule, AppNotification } from "./index";
 import { IonicStorageModule, Storage } from '@ionic/storage';
+import { LoadingControllerProvider } from './loading-controller/loading-controller';
 
 export function provideSettings(storage: Storage) {
     /**
@@ -28,6 +29,7 @@ export function provideSettings(storage: Storage) {
     providers: [
         AppNotification,
         { provide: Settings, useFactory: provideSettings, deps: [ Storage ] },
+        LoadingControllerProvider
     ]
 })
 export class ProvidersModule { }

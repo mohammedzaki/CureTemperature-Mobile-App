@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, ToastController, NavController, LoadingController } from 'ionic-angular';
+import { IonicPage, ToastController, NavController } from 'ionic-angular';
 import { MainPage } from '../pages';
 import { UserAPIService, APIConstants } from "../../providers/api";
 import { LoginData } from "../../models";
-import { AppConstants } from "../../providers";
+import { AppConstants, LoadingControllerProvider } from "../../providers";
 
 @IonicPage()
 @Component({
@@ -22,7 +22,7 @@ export class LoginPage {
         public toastCtrl: ToastController,
         public translateService: TranslateService,
         private loginApi: UserAPIService,
-        public loadingCtrl: LoadingController) {
+        public loadingCtrl: LoadingControllerProvider) {
         this.account = {
             clientId: APIConstants.CLIENT_ID,
             clientSecret: APIConstants.CLIENT_SECRET,
@@ -36,10 +36,7 @@ export class LoginPage {
 
     // Attempt to login in through our User service
     doLogin() {
-        let loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        loading.present();
+        this.loadingCtrl.showLoading();
         this.loginApi.apiLogin(this.account).subscribe(res => {
             if (res.success && res.returnObject !== null) {
 
@@ -48,11 +45,11 @@ export class LoginPage {
                 storage.setItem(AppConstants.USER_ID, res.returnObject.id);
 
                 console.log(" after login: ", res.returnObject);
-                loading.dismiss();
+                this.loadingCtrl.hideLoading();
                 this.navCtrl.setRoot(MainPage);
             }
         }, err => {
-            loading.dismiss();
+            this.loadingCtrl.hideLoading();
             let toast = this.toastCtrl.create({
                 message: this.loginErrorString,
                 duration: 6000

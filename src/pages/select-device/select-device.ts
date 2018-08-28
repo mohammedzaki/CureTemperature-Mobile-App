@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { UserDevicesService } from "../../providers/api";
-import { AppConstants } from "../../providers";
+import { AppConstants, LoadingControllerProvider } from "../../providers";
 import { Device } from "../../models";
 
 /**
@@ -27,7 +27,7 @@ export class SelectDevicePage {
         private viewController: ViewController,
         private userDevicesService: UserDevicesService,
         public toastCtrl: ToastController,
-        public loadingCtrl: LoadingController) {
+        public loadingCtrl: LoadingControllerProvider) {
     }
 
     ionViewDidLoad() {
@@ -40,20 +40,16 @@ export class SelectDevicePage {
     }
 
     setDevices() {
-        let loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        loading.present();
+        this.loadingCtrl.showLoading();
         var storage = window.localStorage;
         let userId = storage.getItem(AppConstants.USER_ID);
         this.userDevicesService.getUserDevices(userId).subscribe(res => {
             if (res.success) {
                 this.devices = res.data.devices;
-                loading.dismiss();
-
+                this.loadingCtrl.hideLoading();
             }
         }, err => {
-            loading.dismiss();
+            this.loadingCtrl.hideLoading();
             let toast = this.toastCtrl.create({
                 message: err,
                 duration: 6000

@@ -1,10 +1,11 @@
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
-import { NavController, IonicPage, Platform, ToastController, LoadingController, ModalController } from 'ionic-angular';
+import { NavController, IonicPage, Platform, ToastController, ModalController } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { Device, Account } from "../../models";
 import * as moment from 'moment';
 import { DeviceService } from "../../providers/api";
 import { SelectDevicePage } from "../pages";
+import { LoadingControllerProvider } from '../../providers';
 
 @IonicPage()
 @Component({
@@ -41,7 +42,7 @@ export class DeviceHistoryPage {
         private deviceService: DeviceService,
         private toastCtrl: ToastController,
         private modalController: ModalController,
-        private loadingCtrl: LoadingController) {
+        private loadingCtrl: LoadingControllerProvider) {
         this.isAndroid = this.platform.is('android');
     }
 
@@ -86,17 +87,14 @@ export class DeviceHistoryPage {
     getDeviceHistory() {
         this.setStartEndDates();
         console.log('startDate: ', this.startDate, 'endDate: ', this.endDate);
-        let loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        loading.present();
+        this.loadingCtrl.showLoading();
         this.deviceService.getDeviceHistory(this.device.id, this.startDate, this.endDate).subscribe(res => {
             if (res.success) {
                 this.loadLineChart(this.chartLables, res.data);
-                loading.dismiss();
+                this.loadingCtrl.hideLoading();
             }
         }, err => {
-            loading.dismiss();
+            this.loadingCtrl.hideLoading();
             let toast = this.toastCtrl.create({
                 message: err,
                 duration: 6000
