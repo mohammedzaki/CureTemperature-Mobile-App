@@ -32,8 +32,8 @@ export class DeviceHistoryPage {
     chartLables = null;
 
     account: Account = {
-        name: 'Cure Group',
-        place: 'Sheraton'
+        name: '...',
+        place: '...'
     };
 
     constructor(
@@ -137,6 +137,7 @@ export class DeviceHistoryPage {
         // Getting data from the modal:
         modal.onDidDismiss(selectedDevice => {
             this.device = selectedDevice;
+            this.account = selectedDevice.account;
         });
         modal.present();
     }

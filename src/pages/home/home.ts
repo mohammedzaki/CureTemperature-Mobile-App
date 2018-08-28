@@ -18,8 +18,8 @@ export class HomePage {
     deviceDL: Device = {};
     deviceDR: Device = {};
     account: Account = {
-        name: 'Cure Group',
-        place: 'Sheraton'
+        name: '...',
+        place: '...'
     };
     userPerferedDevices: UserPerferedDevicesI;
 

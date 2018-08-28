@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { UserDevicesService } from "../../providers/api";
 import { AppConstants, LoadingControllerProvider } from "../../providers";
-import { Device } from "../../models";
+import { Device, Account } from "../../models";
 
 /**
  * Generated class for the SelectDevicePage page.
@@ -20,7 +20,11 @@ export class SelectDevicePage {
 
     devices: Device[] = [];
     device;
-
+    account: Account = {
+        name: '...',
+        place: '...'
+    };
+    
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -36,6 +40,7 @@ export class SelectDevicePage {
     }
 
     dismiss(device: Device) {
+        device.account = this.account;
         this.viewController.dismiss(device);
     }
 
@@ -46,6 +51,7 @@ export class SelectDevicePage {
         this.userDevicesService.getUserDevices(userId).subscribe(res => {
             if (res.success) {
                 this.devices = res.data.devices;
+                this.account = res.data.account;
                 this.loadingCtrl.hideLoading();
             }
         }, err => {

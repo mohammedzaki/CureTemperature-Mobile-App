@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-
+import { Account } from "./";
 
 export interface Device {
     /**
@@ -51,4 +51,6 @@ export interface Device {
     deviceCategoryId?: number;
     
     shouldShow?: boolean;
+    
+    account?: Account;
 }
