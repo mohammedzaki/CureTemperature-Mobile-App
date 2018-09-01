@@ -19,10 +19,10 @@ export class LoginPage {
 
     constructor(
         public navCtrl: NavController,
-        public toastCtrl: ToastController,
-        public translateService: TranslateService,
+        private toastCtrl: ToastController,
+        private translateService: TranslateService,
         private loginApi: UserAPIService,
-        public loadingCtrl: LoadingControllerProvider) {
+        private loadingCtrl: LoadingControllerProvider) {
         this.account = {
             clientId: APIConstants.CLIENT_ID,
             clientSecret: APIConstants.CLIENT_SECRET,
