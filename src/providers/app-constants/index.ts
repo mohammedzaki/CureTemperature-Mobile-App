@@ -5,6 +5,7 @@ export class AppConstants {
     
     static readonly EVENTS = {
         USER_LOGOUT: 'user:logout',
-        LANGUAGE_CHANGED: 'language:changed'
+        LANGUAGE_CHANGED: 'language:changed',
+        CHANGE_ORIENTATION: 'change:orientation'
     };
 }

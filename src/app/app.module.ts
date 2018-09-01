@@ -11,6 +11,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { ProvidersModule } from "../providers/providers.module";
 import { Firebase } from "@ionic-native/firebase";
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -45,6 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
         SplashScreen,
         StatusBar,
         Firebase,
+        ScreenOrientation,
         // Keep this to enable Ionic's runtime error handling during development
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]

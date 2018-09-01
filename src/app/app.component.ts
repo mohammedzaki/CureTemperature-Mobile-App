@@ -6,12 +6,13 @@ import { Config, Nav, Platform, Events } from 'ionic-angular';
 import { FirstRunPage, MainPage } from '../pages/pages';
 import { Settings, AppConstants } from '../providers';
 import { UserAPIService } from "../providers/api";
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @Component({
     templateUrl: 'app.html'
 })
 export class MyApp {
-    
+
     @ViewChild(Nav) nav: Nav;
 
     constructor(
@@ -22,7 +23,8 @@ export class MyApp {
         private statusBar: StatusBar,
         private splashScreen: SplashScreen,
         private loginApi: UserAPIService,
-        private events: Events) {
+        private events: Events,
+        private screenOrientation: ScreenOrientation) {
 
         this.startApp();
 
@@ -31,6 +33,9 @@ export class MyApp {
         });
         this.events.subscribe(AppConstants.EVENTS.USER_LOGOUT, componentPage => {
             this.restartApp(componentPage);
+        });
+        this.events.subscribe(AppConstants.EVENTS.CHANGE_ORIENTATION, orientation => {
+            this.changeOrientation(orientation);
         });
     }
 
@@ -52,16 +57,22 @@ export class MyApp {
         this.settings.load().then(() => {
             this.initTranslate();
             this.nav.setRoot(this.loginApi.isAuthenticated() ? mainPage : FirstRunPage, params);
+
             this.platform.ready().then(() => {
                 // Okay, so the platform is ready and our plugins are available.
                 // Here you can do any higher level native things you might need.
                 this.statusBar.styleDefault();
                 this.splashScreen.hide();
+                this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
             });
         });
     }
 
     restartApp(componentPage = MainPage, params = {}) {
         this.startApp(componentPage, params);
+    }
+
+    changeOrientation(orientation: string) {
+        this.screenOrientation.lock(orientation);
     }
 }

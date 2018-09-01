@@ -9,8 +9,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="device-history-page-segment">
-
+<ion-content class="has-background">
     <div class="rangselector-container">
         <ion-segment [(ngModel)]="rangselector">
             <ion-segment-button value="day" (ionSelect)="setSelected('day')">
@@ -100,9 +99,4 @@
             <button ion-button color="assertive" block (click)="getDeviceHistory()" >{{ 'Submit' | translate }}</button>
         </ion-col>
     </div>
-
-</ion-content>
-
-<ion-content class="device-history-page-content">
-    <canvas class="graph" #lineCanvas></canvas>
 </ion-content>

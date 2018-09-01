@@ -13,3 +13,4 @@ export const LoginPage = 'LoginPage';
 export const NotificationModal = 'NotificationModal';
 export const SettingsPage = 'SettingsPage';
 export const SelectDevicePage = 'SelectDevicePage';
+export const DeviceHistoryResultPage = 'DeviceHistoryResultPage';

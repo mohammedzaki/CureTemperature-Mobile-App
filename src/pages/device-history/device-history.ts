@@ -1,35 +1,32 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
-import { NavController, IonicPage, Platform, ToastController, ModalController } from 'ionic-angular';
-import { Chart } from 'chart.js';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { NavController, IonicPage, ToastController, ModalController } from 'ionic-angular';
 import { Device, Account } from "../../models";
-import * as moment from 'moment';
 import { DeviceService } from "../../providers/api";
-import { SelectDevicePage } from "../pages";
+import { SelectDevicePage, DeviceHistoryResultPage } from "../pages";
 import { LoadingControllerProvider } from '../../providers';
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
     selector: 'page-device-history',
-    templateUrl: 'device-history.html', encapsulation: ViewEncapsulation.None,
+    templateUrl: 'device-history.html',
+    encapsulation: ViewEncapsulation.None,
 })
 export class DeviceHistoryPage {
 
-    @ViewChild('lineCanvas') lineCanvas;
-    public device: Device = {};
-    lineChart: any;
+    device: Device = {};
+
     rangselector: string = 'day';
     searchType: string = 'day';
-    isAndroid: boolean = false;
     startDate: string = null;
     endDate: string = null;
 
-    selectedDayDate = null;
-    selectedMonthWeek = null;
-    selectedWeek = null;
-    selectedMonth = null;
-    selectedStartDate = null;
-    selectedEndDate = null;
-    chartLables = null;
+    selectedDayDate: any = null;
+    selectedMonthWeek: any = null;
+    selectedWeek: any = null;
+    selectedMonth: any = null;
+    selectedStartDate: any = null;
+    selectedEndDate: any = null;
 
     account: Account = {
         name: '...',
@@ -38,75 +35,42 @@ export class DeviceHistoryPage {
 
     constructor(
         public navCtrl: NavController,
-        private platform: Platform,
         private deviceService: DeviceService,
         private toastCtrl: ToastController,
         private modalController: ModalController,
         private loadingCtrl: LoadingControllerProvider) {
-        this.isAndroid = this.platform.is('android');
-    }
-
-    ionViewDidLoad() {
-    }
-
-    loadLineChart(lables: any, data: any) {
-        this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-            type: 'line',
-            data: this.prepareData(lables, data)
-        });
-    }
-
-    prepareData(lables: any, data: any) {
-        return {
-            labels: lables,
-            datasets: [ {
-                label: "My First dataset",
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: data,
-                fill: false,
-                lineTension: .4,
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                spanGaps: false
-            }]
-        };
     }
 
     getDeviceHistory() {
-        this.setStartEndDates();
-        console.log('startDate: ', this.startDate, 'endDate: ', this.endDate);
-        this.loadingCtrl.showLoading();
-        this.deviceService.getDeviceHistory(this.device.id, this.startDate, this.endDate).subscribe(res => {
-            if (res.success) {
-                this.loadLineChart(this.chartLables, res.data);
+        if (this.device.id != null) {
+            this.setStartEndDates();
+            console.log('startDate: ', this.startDate, 'endDate: ', this.endDate);
+            this.loadingCtrl.showLoading();
+            this.deviceService.getDeviceHistory(this.device.id, this.startDate, this.endDate).subscribe(res => {
+                if (res.success) {
+                    this.loadResultPage(res.data);
+                    this.loadingCtrl.hideLoading();
+                }
+            }, err => {
                 this.loadingCtrl.hideLoading();
-            }
-        }, err => {
-            this.loadingCtrl.hideLoading();
-            let toast = this.toastCtrl.create({
-                message: err,
-                duration: 6000
+                let toast = this.toastCtrl.create({
+                    message: err,
+                    duration: 3000
+                });
+                console.log(err);
+                toast.present();
             });
-            console.log(err);
+        } else {
+            let toast = this.toastCtrl.create({
+                message: "Please select device first!",
+                duration: 3000
+            });
             toast.present();
-        });
+        }
     }
 
     setStartEndDates() {
         let dFormat = 'YYYY-MM-DD HH:mm:ss';
-        this.chartLables = [ "January", "February", "March", "April", "May", "June", "July" ];
         switch (this.searchType) {
             case 'day':
                 this.startDate = moment(this.selectedDayDate).startOf('day').format(dFormat).toString();
@@ -142,4 +106,7 @@ export class DeviceHistoryPage {
         modal.present();
     }
 
+    loadResultPage(resultData: any) {
+        this.navCtrl.push(DeviceHistoryResultPage, { device: this.device, searchType: this.searchType, resultData: resultData, startDate: this.startDate, endDate: this.endDate });
+    }
 }
