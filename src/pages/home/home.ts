@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, ToastController } from 'ionic-angular';
 import { NotificationModal, DevicesPage } from "../pages";
 import { AppNotification, AppConstants, Settings, LoadingControllerProvider } from "../../providers";
 import { Device, Account } from "../../models";
