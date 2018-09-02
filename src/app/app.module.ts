@@ -12,6 +12,7 @@ import { MyApp } from './app.component';
 import { ProvidersModule } from "../providers/providers.module";
 import { Firebase } from "@ionic-native/firebase";
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Media } from '@ionic-native/media';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -47,6 +48,7 @@ export function createTranslateLoader(http: HttpClient) {
         StatusBar,
         Firebase,
         ScreenOrientation,
+        Media,
         // Keep this to enable Ionic's runtime error handling during development
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]

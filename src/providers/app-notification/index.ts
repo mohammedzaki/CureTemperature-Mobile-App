@@ -3,7 +3,7 @@ import { Platform, ToastController } from "ionic-angular";
 import { Firebase } from "@ionic-native/firebase";
 import { UserAPIService } from "../api";
 import { AppConstants } from "../index";
-import { tap } from 'rxjs/operators';
+import { MediaObject, Media } from '@ionic-native/media';
 
 @Injectable()
 export class AppNotification {
@@ -14,7 +14,8 @@ export class AppNotification {
         private platform: Platform,
         private toastCtrl: ToastController,
         private firebaseNative: Firebase,
-        private userProfileApi: UserAPIService) {
+        private userProfileApi: UserAPIService,
+        private media: Media) {
         this.userId = +window.localStorage.getItem(AppConstants.USER_ID);
         this.userProfileApi.configuration.accessToken = window.localStorage.getItem(AppConstants.API_ACCESS_TOKEN);
         console.log('accessToken from UserAPIService: ' + this.userProfileApi.configuration.accessToken);
@@ -37,9 +38,21 @@ export class AppNotification {
 
     // Listen to incoming FCM messages
     private listenToNotifications() {
-        this.firebaseNative.onNotificationOpen().pipe(
-            tap(this.onNotificationOpen)
-        ).subscribe();
+        this.firebaseNative.onNotificationOpen().subscribe(data => {
+            if (data.tap) {
+                //Notification was received on device tray and tapped by the user.
+                //alert('in background: ' + JSON.stringify(data));
+                //console.log('in background: ' + JSON.stringify(data));
+                alert(data.tempServerMessage);
+            } else if (!data.tap) {
+                //Notification was received in foreground. Maybe the user needs to be notified.
+                //alert('in foreground: ' + JSON.stringify(data));
+                let notificatioSoundURL = this.platform.is('android') ? `/android_asset/www/assets/audio/curealarm.mp3` : `cdvfile://localhost/bundle/www/assets/audio/curealarm.wav`;
+                const file: MediaObject = this.media.create(notificatioSoundURL);
+                file.play();
+                alert(data.tempServerMessage);
+            }
+        });
     }
 
     private saveDeviceTokenToDatabase(deviceToken: string) {
@@ -66,18 +79,6 @@ export class AppNotification {
             });
             toast.present();
         });
-    }
-
-    private onNotificationOpen(data) {
-        if (data.tap) {
-            //Notification was received on device tray and tapped by the user.
-            alert('in background: ' + JSON.stringify(data));
-            console.log('in background: ' + JSON.stringify(data));
-        } else if (!data.tap) {
-            //Notification was received in foreground. Maybe the user needs to be notified.
-            alert('in foreground: ' + JSON.stringify(data));
-            console.log('in foreground: ' + JSON.stringify(data));
-        }
     }
 
     public setAppNotification() {
